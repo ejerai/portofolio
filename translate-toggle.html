@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="title">My Website</title>
+<style>
+  /* ===== TAHAP 2: STYLING CSS ===== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #ffffff;
+    color: #1f2937;
+    min-height: 100vh;
+    padding: 40px 20px;
+    line-height: 1.6;
+  }
+
+  /* RTL support untuk Arab */
+  body[dir="rtl"] {
+    font-family: 'Segoe UI', 'Tahoma', sans-serif;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Header dengan toggle */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  /* ===== TRANSLATE TOGGLE ===== */
+  .translate-wrapper {
+    position: relative;
+  }
+
+  .translate-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.2s ease;
+  }
+
+  .translate-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transform: translateY(-1px);
+  }
+
+  .translate-btn:active {
+    transform: translateY(0);
+  }
+
+  .translate-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: #6b7280;
+    transition: stroke 0.2s ease;
+  }
+
+  .translate-btn:hover svg {
+    stroke: #111827;
+  }
+
+  .chevron {
+    width: 14px !important;
+    height: 14px !important;
+    transition: transform 0.25s ease;
+  }
+
+  .translate-btn.active .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 100;
+  }
+
+  body[dir="rtl"] .lang-dropdown {
+    right: auto;
+    left: 0;
+  }
+
+  .lang-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #374151;
+    text-align: left;
+    transition: background 0.15s ease;
+  }
+
+  body[dir="rtl"] .lang-option {
+    text-align: right;
+  }
+
+  .lang-option:hover {
+    background: #f3f4f6;
+  }
+
+  .lang-option.active {
+    background: #f9fafb;
+    color: #111827;
+    font-weight: 500;
+  }
+
+  .lang-option .flag {
+    margin-right: 10px;
+    font-size: 16px;
+  }
+
+  .lang-option .check {
+    opacity: 0;
+    color: #10b981;
+  }
+
+  .lang-option.active .check {
+    opacity: 1;
+  }
+
+  /* Demo content */
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    color: #6b7280;
+    font-size: 17px;
+    margin-bottom: 32px;
+  }
+
+  .card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .card h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #111827;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- ===== TAHAP 1: STRUKTUR HTML ===== -->
+    <header class="header">
+      <div class="logo" data-i18n="logo">MySite</div>
+
+      <div class="translate-wrapper">
+        <button class="translate-btn" id="translateBtn" aria-label="Change language">
+          <!-- SVG Icon Translate -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 8 6 6"/>
+            <path d="m4 14 6-6 2-3"/>
+            <path d="M2 5h12"/>
+            <path d="M7 2h1"/>
+            <path d="m22 22-5-10-5 10"/>
+            <path d="M14 18h6"/>
+          </svg>
+          <span id="currentLang">English</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+
+        <div class="lang-dropdown" id="langDropdown">
+          <button class="lang-option active" data-lang="en">
+            <span><span class="flag">🇬🇧</span>English</span>
+            <span class="check">✓</span>
+          </button>
+          <button class="lang-option" data-lang="ar">
+            <span><span class="flag">🇸🇦</span>العربية</span>
+            <span class="check">✓</span>
+          </button>
+          <button class="lang-option" data-lang="id">
+            <span><span class="flag">🇮🇩</span>Indonesia</span>
+            <span class="check">✓</span>
+          </button>
+          <button class="lang-option" data-lang="es">
+            <span><span class="flag">🇪🇸</span>Español</span>
+            <span class="check">✓</span>
+          </button>
+          <button class="lang-option" data-lang="fr">
+            <span><span class="flag">🇫🇷</span>Français</span>
+            <span class="check">✓</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <h1 data-i18n="heading">Welcome to Our Website</h1>
+      <p class="subtitle" data-i18n="subtitle">A clean and modern design with multilingual support.</p>
+
+      <div class="card">
+        <h2 data-i18n="card1Title">About Us</h2>
+        <p data-i18n="card1Body">We build modern web experiences with attention to detail.</p>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="card2Title">Our Services</h2>
+        <p data-i18n="card2Body">Web design, development, and consulting for businesses worldwide.</p>
+      </div>
+    </main>
+  </div>
+
+<script>
+  /* ===== TAHAP 3: DICTIONARY BAHASA ===== */
+  const translations = {
+    en: {
+      title: "My Website",
+      logo: "MySite",
+      heading: "Welcome to Our Website",
+      subtitle: "A clean and modern design with multilingual support.",
+      card1Title: "About Us",
+      card1Body: "We build modern web experiences with attention to detail.",
+      card2Title: "Our Services",
+      card2Body: "Web design, development, and consulting for businesses worldwide.",
+      langName: "English"
+    },
+    ar: {
+      title: "موقعي",
+      logo: "موقعي",
+      heading: "مرحبًا بكم في موقعنا",
+      subtitle: "تصميم نظيف وحديث مع دعم متعدد اللغات.",
+      card1Title: "من نحن",
+      card1Body: "نبني تجارب ويب حديثة مع الاهتمام بالتفاصيل.",
+      card2Title: "خدماتنا",
+      card2Body: "تصميم وتطوير الويب والاستشارات للشركات في جميع أنحاء العالم.",
+      langName: "العربية"
+    },
+    id: {
+      title: "Situs Saya",
+      logo: "SitusKu",
+      heading: "Selamat Datang di Website Kami",
+      subtitle: "Desain bersih dan modern dengan dukungan multibahasa.",
+      card1Title: "Tentang Kami",
+      card1Body: "Kami membangun pengalaman web modern dengan perhatian pada detail.",
+      card2Title: "Layanan Kami",
+      card2Body: "Desain web, pengembangan, dan konsultasi untuk bisnis di seluruh dunia.",
+      langName: "Indonesia"
+    },
+    es: {
+      title: "Mi Sitio",
+      logo: "MiSitio",
+      heading: "Bienvenido a Nuestro Sitio Web",
+      subtitle: "Un diseño limpio y moderno con soporte multilingüe.",
+      card1Title: "Sobre Nosotros",
+      card1Body: "Construimos experiencias web modernas con atención al detalle.",
+      card2Title: "Nuestros Servicios",
+      card2Body: "Diseño web, desarrollo y consultoría para empresas en todo el mundo.",
+      langName: "Español"
+    },
+    fr: {
+      title: "Mon Site",
+      logo: "MonSite",
+      heading: "Bienvenue sur Notre Site Web",
+      subtitle: "Un design épuré et moderne avec support multilingue.",
+      card1Title: "À Propos",
+      card1Body: "Nous créons des expériences web modernes avec attention aux détails.",
+      card2Title: "Nos Services",
+      card2Body: "Conception web, développement et conseil pour les entreprises du monde entier.",
+      langName: "Français"
+    }
+  };
+
+  /* ===== TAHAP 4: FUNGSI SWITCH LANGUAGE ===== */
+  const translateBtn = document.getElementById('translateBtn');
+  const langDropdown = document.getElementById('langDropdown');
+  const currentLangSpan = document.getElementById('currentLang');
+  const langOptions = document.querySelectorAll('.lang-option');
+
+  // Toggle dropdown
+  translateBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    translateBtn.classList.toggle('active');
+    langDropdown.classList.toggle('show');
+  });
+
+  // Klik di luar untuk tutup dropdown
+  document.addEventListener('click', () => {
+    translateBtn.classList.remove('active');
+    langDropdown.classList.remove('show');
+  });
+
+  langDropdown.addEventListener('click', (e) => e.stopPropagation());
+
+  // Fungsi ganti bahasa
+  function setLanguage(lang) {
+    const dict = translations[lang];
+    if (!dict) return;
+
+    // Update semua elemen dengan data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) {
+        if (el.tagName === 'TITLE') {
+          document.title = dict[key];
+        } else {
+          el.textContent = dict[key];
+        }
+      }
+    });
+
+    // Update arah teks untuk Arab (RTL)
+    document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+
+    // Update tombol & state aktif
+    currentLangSpan.textContent = dict.langName;
+    langOptions.forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.lang === lang);
+    });
+
+    /* ===== TAHAP 5: SIMPAN PREFERENSI ===== */
+    localStorage.setItem('preferredLang', lang);
+  }
+
+  // Event listener untuk setiap option
+  langOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      setLanguage(option.dataset.lang);
+      translateBtn.classList.remove('active');
+      langDropdown.classList.remove('show');
+    });
+  });
+
+  // Load bahasa tersimpan saat halaman dibuka
+  const savedLang = localStorage.getItem('preferredLang') || 'en';
+  setLanguage(savedLang);
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!-- penambahan project taruh di dalam <div class="project-grid">, sebelum </div> penutup grid: -->
+<div
+  class="folder-card reveal reveal-left"
+  data-project="NAMAPROYEK"
+  role="button"
+  tabindex="0"
+  aria-label="Buka detail Nama Proyek Kamu"
+>
+  <div class="folder-tab">
+    <span class="folder-tab-label">Kategori Proyek</span>
+    <span class="folder-tab-dots"><span></span><span></span><span></span></span>
+  </div>
+  <div class="folder-body">
+    <div class="folder-content">
+      <div class="folder-icon-wrap">
+        <svg
+          class="folder-main-icon line"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g>
+            <path
+              d="M100.29,260.34082H97.45242a3.9777,3.9777,0,0,1-3.33828-1.81486h0a3.9777,3.9777,0,0,0-3.33829-1.81486H90.29a5,5,0,0,0-5,5v6a5,5,0,0,0,5,5h10a5,5,0,0,0,5-5v-2.37028A5,5,0,0,0,100.29,260.34082Z" transform="translate(-83.28996 -252.7111)"
+            ></path>
+            <line x1="14.71978" y1="15" x2="9.28022" y2="15"></line>
+          </g>
+        </svg>
+      </div>
+      <h3 class="folder-title">Judul Proyek Kamu</h3>
+      <p class="folder-meta">Kategori · Sub-keterangan</p>
+      <div class="folder-tags">
+        <span class="folder-tag">HTML</span>
+        <span class="folder-tag">CSS</span>
+        <span class="folder-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="folder-open-hint">
+      <svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><g transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)"><line x1="6.7743" y1="15.7501" x2="6.7743" y2="0.7501"></line><path d="M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998"></path></g></svg>
+      Buka Folder
+    </div>
+  </div>
+</div>
+
+<!-- pop up nya "taruh di dalam .projects-container, di bawah .project-grid"-->
+<div
+  class="project-modal"
+  id="modal-NAMAPROYEK"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Detail Nama Proyek Kamu"
+>
+  <div class="modal-backdrop"></div>
+  <div class="modal-dossier">
+    <div class="modal-dossier-header">
+      <div class="modal-dossier-stamp">PRJ-003</div>
+      <div class="modal-dossier-ref">2026</div>
+      <button class="modal-close" aria-label="Tutup">
+        <svg
+          class="line"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+        >
+          <g
+            transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(6.000000, 6.000000)"
+          >
+            <line x1="6" y1="0" x2="6" y2="12"></line>
+            <line x1="0" y1="6" x2="12" y2="6"></line>
+          </g>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-img-float">
+      <div class="modal-img-placeholder">
+        <img src="gmi/nama-file-gambar.webp" alt="Tampilan Proyek Kamu" />
+      </div>
+    </div>
+
+    <div class="modal-info-panel">
+      <div class="modal-info-left">
+        <h2 class="modal-title">Judul Proyek Kamu</h2>
+        <p class="modal-desc">
+          Deskripsi singkat proyek: apa masalahnya, apa solusinya, dan apa
+          hasilnya.
+        </p>
+      </div>
+
+      <div class="modal-info-right">
+        <div class="modal-meta-block">
+          <div class="modal-meta-item">
+            <span class="modal-meta-key">Kategori</span>
+            <span class="modal-meta-val">Isi kategori</span>
+          </div>
+          <div class="modal-meta-item">
+            <span class="modal-meta-key">Tahun</span>
+            <span class="modal-meta-val">2026</span>
+          </div>
+        </div>
+        <div class="modal-section-label">— Stack &amp; Teknologi</div>
+        <div class="modal-tech-grid">
+          <div class="modal-tech-chip">
+            <span class="modal-tech-dot" style="background: #f7751e"></span>HTML
+          </div>
+          <div class="modal-tech-chip">
+            <span class="modal-tech-dot" style="background: #3572a5"></span>CSS
+          </div>
+        </div>
+        <div class="modal-actions">
+          <a href="#" target="_blank" class="modal-btn-primary">
+            <svg
+              class="line"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="14"
+              height="14"
+            >
+              <g>
+                <polyline points="17 13 17 19 5 19 5 7 11 7"></polyline>
+                <polyline points="14 5 19 5 19 10"></polyline>
+                <line x1="19" y1="5" x2="11" y2="13"></line>
+              </g>
+            </svg>
+            Lihat Proyek
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- penambahan sertifikat -->
+Ini gampang banget — nggak perlu sentuh HTML sama sekali. Sertifikat dikelola
+lewat objek JavaScript espData di file about.js, ada 2 kategori: akademik dan
+prestasi. List dan counter-nya otomatis ter-update sendiri dari situ. Cara
+nambahnya, tinggal tambah satu object baru di dalam array yang sesuai:Lihat isi
+lengkap espData saat iniLihat isi lengkap espData saat iniContoh, kalau mau
+nambah sertifikat akademik baru (misalnya sertifikat Dicoding): jsakademik:
+<!--
+[
+  {
+    title: "Belajar Dasar Pemrograman Web",
+    meta: "Dicoding · 2026",
+    img: "gmi/sertifikat-dicoding.webp",
+    desc: "Menyelesaikan kelas dasar HTML, CSS, dan JavaScript di Dicoding Indonesia."
+  }
+] -->
+, Atau kalau mau nambah ke prestasi (tinggal tambah koma + object baru setelah
+item terakhir): jsprestasi:
+<!-- [
+  { title: "Taekwondo", ... },
+  { title: "Volunteer Kartini Day 2026", ... },
+  {
+    title: "Judul Sertifikat/Prestasi Baru",
+    meta: "Penyelenggara · Tahun",
+    img: "gmi/nama-file-gambar.webp",
+    desc: "Deskripsi singkat prestasinya."
+  }
+] -->
+Field yang tersedia: title — judul yang tampil di list & preview meta — subjudul
+kecil di bawah judul di list (penyelenggara/kategori) img — path gambar
+sertifikat/foto (taruh filenya di folder gmi/) desc — deskripsi di panel preview
+kanan (boleh pakai <br />
+buat ganti baris) pdf (opsional) — kalau ada, muncul tombol PDF di preview
+(lihat contoh "Volunteer Kartini Day 2026") Setelah disave, folder card
+"Akademik" atau "Prestasi & Sertif" di halaman about otomatis nampilin item
+barunya — nggak perlu edit about.html atau about.css sama sekali. Kalau kamu
+kasih tau detail sertifikatnya (judul, penyelenggara, tahun, deskripsi, ada file
+gambarnya atau belum), saya bisa langsung tulisin object-nya dan tempel ke
+about.js.

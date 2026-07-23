@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- charset & viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- judul halaman -->
+    <title>Ezra Rahmaditya | Front-End Developer & Mahasiswa Teknik Informatika</title>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="/ezra-rahmaditya.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ezra-rahmaditya-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ezra-rahmaditya-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- warna address bar (menyesuaikan light/dark mode) -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f0e8">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1510">
+    <meta name="msapplication-TileColor" content="#1e1510">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- SEO -->
+    <meta name="description" content="Portofolio Ezra Rahmaditya, mahasiswa Teknik Informatika Universitas Budi Luhur yang berfokus pada pengembangan front-end dan software engineering.">
+    <meta name="keywords" content="Ezra Rahmaditya, Portfolio Developer, Informatics Engineering, Raden Ezra Rahmaditya, Front End Development, Universitas Budi Luhur">
+    <meta name="author" content="Ezra Rahmaditya">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ezrarahmaditya.vercel.app">
+    <meta name="google-site-verification" content="QRmhINJJ472jdRAllSPBxICiuItnyVilTbt7pKYK_4o" />
+
+    <!-- open graph (preview saat dibagikan ke sosmed) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Ezra Rahmaditya">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:title" content="Ezra Rahmaditya | Front-End Developer">
+    <meta property="og:description" content="Portofolio Ezra Rahmaditya, mahasiswa Teknik Informatika yang berfokus pada pengembangan perangkat lunak dan frontend.">
+    <meta property="og:image" content="https://ezrarahmaditya.vercel.app/gmi/ezra-rahmaditya.webp">
+    <meta property="og:url" content="https://ezrarahmaditya.vercel.app">
+
+    <!-- twitter card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ezra Rahmaditya | Front-End Developer">
+    <meta name="twitter:description" content="Portofolio Ezra Rahmaditya, mahasiswa Teknik Informatika yang berfokus pada pengembangan perangkat lunak dan frontend.">
+    <meta name="twitter:image" content="https://ezrarahmaditya.vercel.app/gmi/ezra-rahmaditya.webp">
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- dark mode awal (cegah flicker putih sebelum CSS aktif) -->
+    <script>
+      (function () {
+        try {
+          var t =
+            localStorage.getItem("theme") ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.setAttribute("data-theme", t);
+          var m = document.querySelector('meta[name="theme-color"]:not([media])');
+          if (!m) {
+            m = document.createElement("meta");
+            m.setAttribute("name", "theme-color");
+            document.head.appendChild(m);
+          }
+          m.setAttribute("content", t === "dark" ? "#1e1510" : "#f5f0e8");
+        } catch (e) {}
+      })();
+    </script>
+</head>
+<body>
+
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <header id="mainHeader">
+        <div class="nav-container">
+                        <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">Porto<span class="highlight">.</span></a></div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#beranda"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><line x1='14.71978' y1='15.00368' x2='9.28022' y2='15.00368'></line><path d='M100.28571,274.70685h-10a5,5,0,0,1-5-5v-5.00916a5,5,0,0,1,1.601-3.667l5.6798-5.2648a4,4,0,0,1,5.43845,0l5.67981,5.2648a5,5,0,0,1,1.601,3.667v5.00916A5,5,0,0,1,100.28571,274.70685Z' transform='translate(-83.28571 -252.70317)'></path></g></svg></span>Beranda<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+                <li><a href="about.html"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><circle cx='12' cy='8' r='4'></circle><path d='M4,20 C4,16.686 7.582,14 12,14 C16.418,14 20,16.686 20,20'></path></g></svg></span>Tentang<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+                <li><a href="#proyek"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><rect x='5.54615' y='5.54615' width='16.45385' height='16.45385' rx='4'></rect><path d='M171.33311,181.3216v-8.45385a4,4,0,0,1,4-4H183.787' transform='translate(-169.33311 -166.86775)'></path></g></svg></span>Proyek Terbaru<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+                <li><a href="#kontak"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(2.000000, 2.000000)'><line x1='13.9394' y1='10.413' x2='13.9484' y2='10.413'></line><line x1='9.9304' y1='10.413' x2='9.9394' y2='10.413'></line><line x1='5.9214' y1='10.413' x2='5.9304' y2='10.413'></line><path d='M17.0710351,17.0698449 C14.0159481,20.1263505 9.48959549,20.7867004 5.78630747,19.074012 C5.23960769,18.8538953 1.70113357,19.8338667 0.933341969,19.0669763 C0.165550368,18.2990808 1.14639409,14.7601278 0.926307229,14.213354 C-0.787154393,10.5105699 -0.125888852,5.98259958 2.93020311,2.9270991 C6.83146881,-0.9756997 13.1697694,-0.9756997 17.0710351,2.9270991 C20.9803405,6.8359285 20.9723008,13.1680512 17.0710351,17.0698449 Z'></path></g></svg></span>Kontak<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+            </ul>
+
+
+            <button id="menuToggle" class="menu-toggle" aria-label="Buka Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line class="line line-top" x1="4" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    <line class="line line-mid" x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    <line class="line line-bottom" x1="4" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+            <button id="themeToggle" class="theme-toggle js-theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Ganti mode terang atau gelap">
+                <span class="theme-toggle-icon">
+                    <svg class="coffee-icon" viewBox="0 0 48 48" aria-hidden="true">
+                        <path class="steam-wisp" d="M17 10 Q19 6 17 3" />
+                        <path class="steam-wisp" d="M24 10 Q26 6 24 3" />
+                        <path class="steam-wisp" d="M31 10 Q33 6 31 3" />
+                        <path class="cup-body" d="M10 16 h22 v14 a11 11 0 0 1 -11 11 h0 a11 11 0 0 1 -11 -11 Z"/>
+                        <path class="cup-body" d="M32 20 h5 a4 4 0 0 1 0 8 h-5" />
+                        <path class="cup-liquid" d="M12 18 h18 v6 h-18 Z" />
+                    </svg>
+                </span>
+                <span class="theme-toggle-label" data-light>Mode Gelap</span>
+                <span class="theme-toggle-label" data-dark>Mode Terang</span>
+            </button>
+        </div>
+
+        <ul class="nav-links-mobile" id="navLinksMobile">
+            <li><a href="#beranda"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><line x1='14.71978' y1='15.00368' x2='9.28022' y2='15.00368'></line><path d='M100.28571,274.70685h-10a5,5,0,0,1-5-5v-5.00916a5,5,0,0,1,1.601-3.667l5.6798-5.2648a4,4,0,0,1,5.43845,0l5.67981,5.2648a5,5,0,0,1,1.601,3.667v5.00916A5,5,0,0,1,100.28571,274.70685Z' transform='translate(-83.28571 -252.70317)'></path></g></svg></span>Beranda<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+            <li><a href="about.html"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><circle cx='12' cy='8' r='4'></circle><path d='M4,20 C4,16.686 7.582,14 12,14 C16.418,14 20,16.686 20,20'></path></g></svg></span>Tentang<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+            <li><a href="#proyek"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><rect x='5.54615' y='5.54615' width='16.45385' height='16.45385' rx='4'></rect><path d='M171.33311,181.3216v-8.45385a4,4,0,0,1,4-4H183.787' transform='translate(-169.33311 -166.86775)'></path></g></svg></span>Proyek Terbaru<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+            <li><a href="#kontak"><span class="nav-icon"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(2.000000, 2.000000)'><line x1='13.9394' y1='10.413' x2='13.9484' y2='10.413'></line><line x1='9.9304' y1='10.413' x2='9.9394' y2='10.413'></line><line x1='5.9214' y1='10.413' x2='5.9304' y2='10.413'></line><path d='M17.0710351,17.0698449 C14.0159481,20.1263505 9.48959549,20.7867004 5.78630747,19.074012 C5.23960769,18.8538953 1.70113357,19.8338667 0.933341969,19.0669763 C0.165550368,18.2990808 1.14639409,14.7601278 0.926307229,14.213354 C-0.787154393,10.5105699 -0.125888852,5.98259958 2.93020311,2.9270991 C6.83146881,-0.9756997 13.1697694,-0.9756997 17.0710351,2.9270991 C20.9803405,6.8359285 20.9723008,13.1680512 17.0710351,17.0698449 Z'></path></g></svg></span>Kontak<span class="nav-arrow"><svg class="nav-svg" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg></span></a></li>
+            <li class="nav-theme-item">
+                <button id="themeToggleMobile" class="theme-toggle-mobile js-theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Ganti mode terang atau gelap">
+                    <span class="nav-icon">
+                        <svg class="coffee-icon" viewBox="0 0 48 48" aria-hidden="true">
+                            <path class="steam-wisp" d="M17 10 Q19 6 17 3" />
+                            <path class="steam-wisp" d="M24 10 Q26 6 24 3" />
+                            <path class="steam-wisp" d="M31 10 Q33 6 31 3" />
+                            <path class="cup-body" d="M10 16 h22 v14 a11 11 0 0 1 -11 11 h0 a11 11 0 0 1 -11 -11 Z"/>
+                            <path class="cup-body" d="M32 20 h5 a4 4 0 0 1 0 8 h-5" />
+                            <path class="cup-liquid" d="M12 18 h18 v6 h-18 Z" />
+                        </svg>
+                    </span>
+                    <span class="theme-toggle-label" data-light>Mode Gelap</span>
+                    <span class="theme-toggle-label" data-dark>Mode Terang</span>
+                </button>
+            </li>
+        </ul>
+    </header>
+
+    <section id="beranda" class="hero-section">
+
+        
+        <div class="hero-grid-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+
+            
+            <div class="hero-text reveal reveal-left">
+                <h1 id="heroGreeting"><span class="greeting-fade">Halo, aku <span class="highlight">Ezra</span></span></h1>
+                <p>Berfokus pada pembelajaran dan pendewasaan diri. Portofolio ini menampilkan proyek dan kontribusi saya sebagai anak perkuliahan di dunia teknologi.</p>
+            </div>
+
+            
+            <div class="hero-photo-wrap reveal reveal-right" style="--reveal-delay: 0.15s">
+                <div class="hero-photo-ring"></div>
+                <div class="hero-photo-inner">
+                    
+                    <img src="gmi/ezra-rahmaditya.webp" alt="Foto Ezra Rahmaditya" class="hero-photo-img" onerror="this.style.display='none';this.parentElement.classList.add('hero-photo-placeholder')">
+                </div>
+        </div>
+    </section>
+
+    <section id="proyek" class="projects-section">
+        <div class="projects-container">
+            <h2 class="section-title reveal reveal-up">Proyek Terbaru</h2>
+            
+            <div class="project-grid">
+
+                <div class="folder-card reveal reveal-left" data-project="sentiment" role="button" tabindex="0" aria-label="Buka detail Analisis Sentimen Media Sosial">
+                    <div class="folder-tab">
+                        <span class="folder-tab-label">E-Commerce</span>
+                        <span class="folder-tab-dots"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="folder-body">
+                        <div class="folder-content">
+                            
+                            <div class="folder-icon-wrap">
+                                <svg class="folder-main-icon line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><path d='M100.29,260.34082H97.45242a3.9777,3.9777,0,0,1-3.33828-1.81486h0a3.9777,3.9777,0,0,0-3.33829-1.81486H90.29a5,5,0,0,0-5,5v6a5,5,0,0,0,5,5h10a5,5,0,0,0,5-5v-2.37028A5,5,0,0,0,100.29,260.34082Z' transform='translate(-83.28996 -252.7111)'></path><line x1='14.71978' y1='15' x2='9.28022' y2='15'></line></g></svg>
+                            </div>
+                            <h3 class="folder-title">Preloved Kampus<br>Universitas Budi Luhur</h3>
+                            <p class="folder-meta">Blogger · Website Redesign</p>
+                            <div class="folder-tags">
+                                <span class="folder-tag">HTML</span>
+                                <span class="folder-tag">CSS</span>
+                                <span class="folder-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="folder-open-hint">
+                            
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg>
+                            Buka Folder
+                        </div>
+                    </div>
+                </div>
+
+                <div class="folder-card reveal reveal-left" data-project="laundry" role="button" tabindex="0" aria-label="Buka detail Laundry Dashboard">
+                    <div class="folder-tab">
+                        <span class="folder-tab-label">Dashboard</span>
+                        <span class="folder-tab-dots"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="folder-body">
+                        <div class="folder-content">
+                            <div class="folder-icon-wrap">
+                                <svg class="folder-main-icon line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><path d='M100.29,260.34082H97.45242a3.9777,3.9777,0,0,1-3.33828-1.81486h0a3.9777,3.9777,0,0,0-3.33829-1.81486H90.29a5,5,0,0,0-5,5v6a5,5,0,0,0,5,5h10a5,5,0,0,0,5-5v-2.37028A5,5,0,0,0,100.29,260.34082Z' transform='translate(-83.28996 -252.7111)'></path><line x1='14.71978' y1='15' x2='9.28022' y2='15'></line></g></svg>
+                            </div>
+                            <h3 class="folder-title">Laundry Management<br> Admin & Customer</h3>
+                            <p class="folder-meta">Alle Laundry</p>
+                            <div class="folder-tags">
+                                <span class="folder-tag">HTML</span>
+                                <span class="folder-tag">CSS</span>
+                                <span class="folder-tag">PHP</span>
+                                <span class="folder-tag">MySQL</span>
+                                <span class="folder-tag">Midtrans</span>
+                            </div>
+                        </div>
+                        <div class="folder-open-hint">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg>
+                            Buka Folder
+                        </div>
+                    </div>
+                </div>
+
+                <div class="folder-card reveal reveal-left" data-project="bansos" role="button" tabindex="0" aria-label="Buka detail Bansos">
+                    <div class="folder-tab">
+                        <span class="folder-tab-label">ML/Dashboard</span>
+                        <span class="folder-tab-dots"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="folder-body">
+                        <div class="folder-content">
+                            <div class="folder-icon-wrap">
+                                <svg class="folder-main-icon line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><path d='M100.29,260.34082H97.45242a3.9777,3.9777,0,0,1-3.33828-1.81486h0a3.9777,3.9777,0,0,0-3.33829-1.81486H90.29a5,5,0,0,0-5,5v6a5,5,0,0,0,5,5h10a5,5,0,0,0,5-5v-2.37028A5,5,0,0,0,100.29,260.34082Z' transform='translate(-83.28996 -252.7111)'></path><line x1='14.71978' y1='15' x2='9.28022' y2='15'></line></g></svg>
+                            </div>
+                            <h3 class="folder-title">Bansos Crawl Data<br> X/Twitter</h3>
+                            <p class="folder-meta">Machine Learning & Dashboard</p>
+                            <div class="folder-tags">
+                                <span class="folder-tag">Python</span>
+                                <span class="folder-tag">Google Colab</span>
+                                <span class="folder-tag">Streamlit</span>
+                            </div>
+                        </div>
+                        <div class="folder-open-hint">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg>
+                            Buka Folder
+                        </div>
+                    </div>
+                </div>
+
+                <div class="folder-card reveal reveal-left" data-project="futclub" role="button" tabindex="0" aria-label="FutClub">
+                    <div class="folder-tab">
+                        <span class="folder-tab-label">Android</span>
+                        <span class="folder-tab-dots"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="folder-body">
+                        <div class="folder-content">
+                            <div class="folder-icon-wrap">
+                                <svg class="folder-main-icon line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><path d='M100.29,260.34082H97.45242a3.9777,3.9777,0,0,1-3.33828-1.81486h0a3.9777,3.9777,0,0,0-3.33829-1.81486H90.29a5,5,0,0,0-5,5v6a5,5,0,0,0,5,5h10a5,5,0,0,0,5-5v-2.37028A5,5,0,0,0,100.29,260.34082Z' transform='translate(-83.28996 -252.7111)'></path><line x1='14.71978' y1='15' x2='9.28022' y2='15'></line></g></svg>
+                            </div>
+                            <h3 class="folder-title">FutClub</h3>
+                            <p class="folder-meta">Android Studio</p>
+                            <div class="folder-tags">
+                                <span class="folder-tag">Java</span>
+                                <span class="folder-tag">Kotlin</span>
+                                <span class="folder-tag">Firebase</span>
+                                <span class="folder-tag">PHP Rest API</span>
+                                <span class="folder-tag">MySQL</span>
+                            </div>
+                        </div>
+                        <div class="folder-open-hint">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg>
+                            Buka Folder
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="folder-card reveal reveal-left" data-project="sekolah" role="button" tabindex="0" aria-label="Buka detail sekolah">
+                    <div class="folder-tab">
+                        <span class="folder-tab-label">Landing Page</span>
+                        <span class="folder-tab-dots"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="folder-body">
+                        <div class="folder-content">
+                            <div class="folder-icon-wrap">
+                                <svg class="folder-main-icon line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><path d='M100.29,260.34082H97.45242a3.9777,3.9777,0,0,1-3.33828-1.81486h0a3.9777,3.9777,0,0,0-3.33829-1.81486H90.29a5,5,0,0,0-5,5v6a5,5,0,0,0,5,5h10a5,5,0,0,0,5-5v-2.37028A5,5,0,0,0,100.29,260.34082Z' transform='translate(-83.28996 -252.7111)'></path><line x1='14.71978' y1='15' x2='9.28022' y2='15'></line></g></svg>
+                            </div>
+                            <h3 class="folder-title">Website Sekolah</h3>
+                            <p class="folder-meta">Website</p>
+                            <div class="folder-tags">
+                                <span class="folder-tag">HTML</span>
+                                <span class="folder-tag">CSS</span>
+                                <span class="folder-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="folder-open-hint">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg>
+                            Buka Folder
+                        </div>
+                    </div>
+                </div>
+
+                <div class="folder-card reveal reveal-left" data-project="strukin" role="button" tabindex="0" aria-label="Buka detail StruckIn">
+                    <div class="folder-tab">
+                        <span class="folder-tab-label">AI</span>
+                        <span class="folder-tab-dots"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="folder-body">
+                        <div class="folder-content">
+                            <div class="folder-icon-wrap">
+                                <svg class="folder-main-icon line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g><path d='M100.29,260.34082H97.45242a3.9777,3.9777,0,0,1-3.33828-1.81486h0a3.9777,3.9777,0,0,0-3.33829-1.81486H90.29a5,5,0,0,0-5,5v6a5,5,0,0,0,5,5h10a5,5,0,0,0,5-5v-2.37028A5,5,0,0,0,100.29,260.34082Z' transform='translate(-83.28996 -252.7111)'></path><line x1='14.71978' y1='15' x2='9.28022' y2='15'></line></g></svg>
+                            </div>
+                            <h3 class="folder-title">StrukIn</h3>
+                            <p class="folder-meta">AI Project</p>
+                            <div class="folder-tags">
+                                <span class="folder-tag">Python</span>
+                                <span class="folder-tag">JSX</span>
+                                <span class="folder-tag">API</span>
+                            </div>
+                        </div>
+                        <div class="folder-open-hint">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.500000, 4.000000)'><line x1='6.7743' y1='15.7501' x2='6.7743' y2='0.7501'></line><path d='M12.7988,9.6998 C12.7988,9.6998 9.5378,15.7498 6.7758,15.7498 C4.0118,15.7498 0.7498,9.6998 0.7498,9.6998'></path></g></svg>
+                            Buka Folder
+                        </div>
+                    </div>
+                </div>
+            <!-- project close div -->
+            </div>
+
+            <!-- Project Pop Up -->
+
+                        <div class="project-modal" id="modal-sentiment" role="dialog" aria-modal="true" aria-label="Detail Analisis Sentimen Media Sosial">
+                <div class="modal-backdrop"></div>
+                <div class="modal-dossier">
+
+                    <div class="modal-dossier-header">
+                        <div class="modal-dossier-stamp"></div>
+                        <div class="modal-dossier-ref">2025</div>
+                        <button class="modal-close" aria-label="Tutup">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(6.000000, 6.000000)'><line x1='6' y1='0' x2='6' y2='12'></line><line x1='0' y1='6' x2='12' y2='6'></line></g></svg>
+                        </button>
+                    </div>
+
+                    <div class="modal-img-float">
+                        <div class="modal-img-placeholder">
+                            <img src="gmi/UBL-Preloved-Ezra-Rahmaditya.webp" alt="Tampilan website Preloved Kampus Universitas Budi Luhur">
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+
+                        <div class="modal-info-left">
+                            <h2 class="modal-title">Preloved Kampus<br>Universitas Budi Luhur</h2>
+                            <p class="modal-desc">Mempermudah Mahasiswa Universitas Budi Luhur dalam mencari dan menawar barang bekas secara efisien dan aman. dan pasti nya memberikan peluang untuk Mahasiswa yang mau menjual barang bekas mereka.</p>
+                        </div>
+
+                        <div class="modal-info-right">
+                            <div class="modal-meta-block">
+                                <div class="modal-meta-item">
+                                    <span class="modal-meta-val">Blogger Website Redesign</span>
+                                </div>
+                            </div>
+                            <div class="modal-tech-grid">
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#f7751e"></span>HTML</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#3572a5"></span>CSS</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#e2bf21"></span>JavaScript</div>
+                            </div>
+                            <div class="modal-actions">
+                                <a href="https://www.ublpreloved.web.id" target="_blank" class="modal-btn-primary">
+                                    <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g><polyline points='17 13 17 19 5 19 5 7 11 7'></polyline><polyline points='14 5 19 5 19 10'></polyline><line x1='19' y1='5' x2='11' y2='13'></line></g></svg>
+                                    Lihat Proyek
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-modal" id="modal-laundry" role="dialog" aria-modal="true" aria-label="Buka detail Laundry Management">
+                <div class="modal-backdrop"></div>
+                <div class="modal-dossier">
+                    <div class="modal-dossier-header">
+                        <div class="modal-dossier-stamp"></div>
+                        <div class="modal-dossier-ref">2024</div>
+                        <button class="modal-close" aria-label="Tutup">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(6.000000, 6.000000)'><line x1='6' y1='0' x2='6' y2='12'></line><line x1='0' y1='6' x2='12' y2='6'></line></g></svg>
+                        </button>
+                    </div>
+
+                    <div class="modal-img-float">
+                        <div class="modal-img-placeholder">
+                            <img src="gmi/laundry.webp" alt="Tampilan website Preloved Kampus Universitas Budi Luhur">
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+
+                        <div class="modal-info-left">
+                            <h2 class="modal-title">Laundry Management<br>Admin & Customer</h2>
+                            <p class="modal-desc">Sistem manajemen laundry berbasis web dengan panel admin dan panel pelanggan yang terpisah. Mendukung pemesanan layanan, pelacakan status cucian, serta integrasi pembayaran online melalui Midtrans untuk mempermudah transaksi antara pelanggan dan pihak laundry.</p>
+                        </div>
+
+                        <div class="modal-info-right">
+                            <div class="modal-meta-block">
+                                <div class="modal-meta-item">
+                                    <span class="modal-meta-val">Alle Laundry · Aplikasi Web</span>
+                                </div>
+                            </div>
+                            <div class="modal-tech-grid">
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#f7751e"></span>HTML</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#3572a5"></span>CSS</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#8892be"></span>PHP</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#e29c41"></span>MySQL</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#0099e5"></span>Midtrans</div>
+                            </div>
+                            <div class="modal-actions">
+                                <a href="http://alle-laundry.gt.tc" target="_blank" class="modal-btn-primary">
+                                    <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g><polyline points='17 13 17 19 5 19 5 7 11 7'></polyline><polyline points='14 5 19 5 19 10'></polyline><line x1='19' y1='5' x2='11' y2='13'></line></g></svg>
+                                    Lihat Proyek
+                                </a>
+                            </div>                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-modal" id="modal-bansos" role="dialog" aria-modal="true" aria-label="Buka detail Bansos Crawl Data">
+                <div class="modal-backdrop"></div>
+                <div class="modal-dossier">
+                    <div class="modal-dossier-header">
+                        <div class="modal-dossier-stamp"></div>
+                        <div class="modal-dossier-ref">2026</div>
+                        <button class="modal-close" aria-label="Tutup">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(6.000000, 6.000000)'><line x1='6' y1='0' x2='6' y2='12'></line><line x1='0' y1='6' x2='12' y2='6'></line></g></svg>
+                        </button>
+                    </div>
+
+                    <div class="modal-img-float">
+                        <div class="modal-img-placeholder">
+                            <img src="gmi/machine-learning.webp" alt="Machine Learning & Dashboard">
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+
+                        <div class="modal-info-left">
+                            <h2 class="modal-title">Bansos Crawl Data<br>X/Twitter</h2>
+                            <p class="modal-desc">Proyek tugas akhir (UAS) yang menganalisis diskursus masyarakat Indonesia terkait program bantuan sosial (bansos) di platform X/Twitter. Mencakup clustering K-Means, analisis sentimen dengan InSet Lexicon, social network analysis, hingga dashboard interaktif berbasis Streamlit untuk memvisualisasikan hasil analisis.</p>
+                        </div>
+
+                        <div class="modal-info-right">
+                            <div class="modal-meta-block">
+                                <div class="modal-meta-item">
+                                    <span class="modal-meta-val">Machine Learning & Dashboard</span>
+                                </div>
+                            </div>
+                            <div class="modal-tech-grid">
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#3572a5"></span>Python</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#f37626"></span>Jupyter Notebook</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#f9ab00"></span>Google Colab</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#ff4b4b"></span>Streamlit</div>
+                            </div>
+                            <div class="modal-actions">
+                                <a href="https://github.com/ejerai/project-uas-atms" target="_blank" class="modal-btn-primary">
+                                    <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g><polyline points='17 13 17 19 5 19 5 7 11 7'></polyline><polyline points='14 5 19 5 19 10'></polyline><line x1='19' y1='5' x2='11' y2='13'></line></g></svg>
+                                    Lihat Proyek
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-modal" id="modal-futclub" role="dialog" aria-modal="true" aria-label="Buka detail FutClub">
+                <div class="modal-backdrop"></div>
+                <div class="modal-dossier">
+                    <div class="modal-dossier-header">
+                        <div class="modal-dossier-stamp"></div>
+                        <div class="modal-dossier-ref">2026</div>
+                        <button class="modal-close" aria-label="Tutup">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(6.000000, 6.000000)'><line x1='6' y1='0' x2='6' y2='12'></line><line x1='0' y1='6' x2='12' y2='6'></line></g></svg>
+                        </button>
+                    </div>
+
+                    <div class="modal-img-float">
+                        <div class="modal-img-placeholder">
+                            <img src="gmi/futclub.webp" alt="FutClub">
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+
+                        <div class="modal-info-left">
+                            <h2 class="modal-title">FutClub</h2>
+                            <p class="modal-desc">Aplikasi Android untuk komunitas semua olahraga, dibangun dengan Android Studio dan backend PHP REST API terhubung ke MySQL. Dilengkapi antarmuka bergaya glassmorphism, alur login dengan Google, serta integrasi Firebase untuk mendukung fitur-fitur real-time di dalam aplikasi.</p>
+                        </div>
+
+                        <div class="modal-info-right">
+                            <div class="modal-meta-block">
+                                <div class="modal-meta-item">
+                                    <span class="modal-meta-val">Aplikasi Mobile</span>
+                                </div>
+                            </div>
+                            <div class="modal-tech-grid">
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#c8922a"></span>Java</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#7f52ff"></span>Kotlin</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#ffca28"></span>Firebase</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#8892be"></span>PHP Rest API</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#e29c41"></span>MySQL</div>
+                            </div>
+                            <div class="modal-actions">
+                                <a href="https://github.com/ejerai/FutClub" target="_blank" class="modal-btn-primary">
+                                    <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g><polyline points='17 13 17 19 5 19 5 7 11 7'></polyline><polyline points='14 5 19 5 19 10'></polyline><line x1='19' y1='5' x2='11' y2='13'></line></g></svg>
+                                    Lihat Proyek
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-modal" id="modal-sekolah" role="dialog" aria-modal="true" aria-label="Buka detail Website Sekolah">
+                <div class="modal-backdrop"></div>
+                <div class="modal-dossier">
+                    <div class="modal-dossier-header">
+                        <div class="modal-dossier-stamp"></div>
+                        <div class="modal-dossier-ref">2025</div>
+                        <button class="modal-close" aria-label="Tutup">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(6.000000, 6.000000)'><line x1='6' y1='0' x2='6' y2='12'></line><line x1='0' y1='6' x2='12' y2='6'></line></g></svg>
+                        </button>
+                    </div>
+
+                    <div class="modal-img-float">
+                        <div class="modal-img-placeholder">
+                            <img src="gmi/sman-6-depok.webp" alt="SMAN 6 Depok - Website Sekolah">
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+
+                        <div class="modal-info-left">
+                            <h2 class="modal-title">Website Sekolah</h2>
+                            <p class="modal-desc">Landing page untuk program Campus Goes to School, menampilkan informasi kegiatan, jadwal, dan detail program kunjungan kampus ke sekolah-sekolah. Dibangun dengan HTML, CSS, dan JavaScript agar ringan dan mudah diakses.</p>
+                        </div>
+
+                        <div class="modal-info-right">
+                            <div class="modal-meta-block">
+                                <div class="modal-meta-item">
+                                    <span class="modal-meta-val">Website</span>
+                                </div>
+                            </div>
+                            <div class="modal-tech-grid">
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#f7751e"></span>HTML</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#3572a5"></span>CSS</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#e2bf21"></span>JavaScript</div>
+                            </div>
+                            <div class="modal-actions">
+                                <a href="https://ejerai.github.io/Campus-Goes-To-School" target="_blank" class="modal-btn-primary">
+                                    <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g><polyline points='17 13 17 19 5 19 5 7 11 7'></polyline><polyline points='14 5 19 5 19 10'></polyline><line x1='19' y1='5' x2='11' y2='13'></line></g></svg>
+                                    Lihat Proyek
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-modal" id="modal-strukin" role="dialog" aria-modal="true" aria-label="Buka detail StrukIn">
+                <div class="modal-backdrop"></div>
+                <div class="modal-dossier">
+                    <div class="modal-dossier-header">
+                        <div class="modal-dossier-stamp"></div>
+                        <div class="modal-dossier-ref">2025</div>
+                        <button class="modal-close" aria-label="Tutup">
+                            <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g transform='translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(6.000000, 6.000000)'><line x1='6' y1='0' x2='6' y2='12'></line><line x1='0' y1='6' x2='12' y2='6'></line></g></svg>
+                        </button>
+                    </div>
+
+                    <div class="modal-img-float">
+                        <div class="modal-img-placeholder">
+                            <img src="gmi/strukin.webp" alt="StrukIn - Aplikasi Struktur Data">
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+
+                        <div class="modal-info-left">
+                            <h2 class="modal-title">StrukIn</h2>
+                            <p class="modal-desc">Dhika dan saya membuat aplikasi berbasis AI yang menggabungkan backend Python dengan antarmuka frontend berbasis JSX (React), terintegrasi dengan API untuk mendukung pemrosesan data secara otomatis. Deskripsi ini masih perlu disesuaikan lebih lanjut sesuai detail sebenarnya dari proyek kami berdua.</p>
+                        </div>
+
+                        <div class="modal-info-right">
+                            <div class="modal-meta-block">
+                                <div class="modal-meta-item">
+                                    <span class="modal-meta-val">AI Project</span>
+                                </div>
+                            </div>
+                            <div class="modal-tech-grid">
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#3572a5"></span>Python</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#61dafb"></span>JSX</div>
+                                <div class="modal-tech-chip"><span class="modal-tech-dot" style="background:#6e40c9"></span>API</div>
+                            </div>
+                            <div class="modal-actions">
+                                <a href="https://struk-in-app.vercel.app" target="_blank" class="modal-btn-primary">
+                                    <svg class="line" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14'><g><polyline points='17 13 17 19 5 19 5 7 11 7'></polyline><polyline points='14 5 19 5 19 10'></polyline><line x1='19' y1='5' x2='11' y2='13'></line></g></svg>
+                                    Lihat Proyek
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="kontak" class="contact-footer-section">
+
+        <div class="cf-container">
+            <div class="cf-cta reveal reveal-up">
+                <h2>Kontak<span class="highlight">.</span></h2>
+                <a href="mailto:ezrarahmadityaa@gmail.com" class="btn-primary">Hubungi Saya</a>
+            </div>
+        </div>
+
+        <div class="cf-divider"></div>
+
+        <div class="cf-footer-bar">
+            <div class="cf-brand">
+                <div class="logo">Ezra Rahmaditya<span class="highlight">.</span></div>
+            </div>
+
+            <div class="cf-socials">
+                <a href="mailto:ezrarahmadityaa@gmail.com" class="cf-social-btn" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    Email
+                </a>
+                <a href="https://github.com/ejerai" target="_blank" rel="noopener" class="cf-social-btn" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/ezra-rahmaditya-16671a328/" target="_blank" rel="noopener" class="cf-social-btn" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+            </div>
+
+            <div class="cf-copy">
+                <p>&copy; 2026</p>
+            </div>
+        </div>
+
+    </section>
+
+    <div id="backToTopBtn" class="back-to-top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Person",
+  "name": "Ezra Rahmaditya",
+  "jobTitle": "Mahasiswa Teknik Informatika",
+  "url": "https://ezrarahmaditya.vercel.app"
+}
+</script>
+</body>
+</html>
