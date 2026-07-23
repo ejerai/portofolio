@@ -319,7 +319,7 @@ function espRenderList(e) {
         (F = Math.min(P - 1, Math.round(t * (P - 1)))));
       const i = M[F]?.querySelector("img"),
         s = i?.getAttribute("alt") || "Momen " + (F + 1);
-      ((S.textContent = s + " — " + (F + 1) + " dari " + P),
+      ((S.textContent = s),
         H && H.setAttribute("aria-valuenow", String(F + 1)));
     }
     function b(e) {

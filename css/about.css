@@ -677,7 +677,7 @@ h3 {
     height 80ms linear,
     top 80ms linear;
 }
-.pin-rail-machine {
+.pin-rail-machine { 
   position: absolute;
   left: 50%;
   top: 0;
