@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- steam -->
+  <g fill="none" stroke="#c8922a" stroke-width="2" stroke-linecap="round" opacity="0.85">
+    <path d="M17 11 Q19 7 17 4"/>
+    <path d="M24 11 Q26 7 24 4"/>
+    <path d="M31 11 Q33 7 31 4"/>
+  </g>
+
+  <!-- cup liquid -->
+  <path d="M12 18 h18 v6 h-18 Z" fill="#a0521e"/>
+
+  <!-- cup body + handle -->
+  <g fill="none" stroke="#d4a030" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 16 h22 v14 a11 11 0 0 1 -11 11 h0 a11 11 0 0 1 -11 -11 Z"/>
+    <path d="M32 20 h5 a4 4 0 0 1 0 8 h-5"/>
+  </g>
+</svg>
