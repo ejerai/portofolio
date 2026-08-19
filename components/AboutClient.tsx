@@ -85,7 +85,7 @@ export function AboutClient() {
                     <a href="https://www.linkedin.com/in/ezra-rahmaditya-16671a328/" target="_blank" rel="noopener">
                       LinkedIn
                     </a>
-                    &nbsp;·&nbsp;
+                    &nbsp;·&nbsp;<br />
                     <a href="https://www.instagram.com/ejeraaiii" target="_blank" rel="noopener">
                       Instagram
                     </a>
