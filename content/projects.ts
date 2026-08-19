@@ -67,7 +67,7 @@ export const projects: Project[] = [
     img: "/gmi/sman-6-depok.webp",
     imgAlt: "SMAN 6 Depok - Website Sekolah",
     modalTitleLines: ["Website Sekolah"],
-    desc: "Landing page untuk program Campus Goes to School, menampilkan informasi kegiatan, jadwal, dan detail program kunjungan kampus ke sekolah-sekolah. Dibangun dengan HTML, CSS, dan JavaScript agar ringan dan mudah diakses.",
+    desc: "Landing page untuk program Campus Goes to School",
     metaValue: "Website",
     chips: [{ color: "#f7751e", label: "HTML" }, { color: "#3572a5", label: "CSS" }, { color: "#e2bf21", label: "JavaScript" }],
     actionHref: "https://ejerai.github.io/Campus-Goes-To-School",
