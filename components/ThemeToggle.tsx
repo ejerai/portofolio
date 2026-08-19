@@ -6,12 +6,9 @@ interface ThemeToggleProps {
   id: string;
   className: string;
   ariaLabel?: string;
-  /** "theme-toggle-icon" for the desktop header button, "nav-icon" for the mobile nav item. */
   iconWrapperClassName?: string;
 }
 
-/** The coffee-cup dark/light toggle. Renders identically for the desktop
- * header button (#themeToggle) and the mobile nav button (#themeToggleMobile). */
 export function ThemeToggle({
   id,
   className,

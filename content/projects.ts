@@ -5,9 +5,9 @@ export const projects: Project[] = [
   {
     id: "karhutla",
     ariaLabel: "Buka detail Karhutla",
-    tabLabel: "Machine Learning",
+    tabLabel: "ML",
     titleLines: ["Karhutla Detection"],
-    meta: "GEMASTIK XIX 2026",
+    meta: "Early Warning System",
     tags: ["Astro", "NASA FIRMS API", "Python", "JavaScript"],
     refYear: "2026",
     img: "/gmi/karhutla.webp",

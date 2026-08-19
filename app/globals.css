@@ -245,6 +245,7 @@ header.scrolled {
   transition: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 header.scrolled .nav-container {
+  backdrop-filter: blur(10px) saturate(200%);
   padding: 11px 28px;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px) saturate(90%);
@@ -254,6 +255,7 @@ header.scrolled .nav-container {
     0 2px 0 var(--accent-gold),
     0 8px 32px var(--shadow-soft);
 }
+@media (max-width: 768px) {header.scrolled .nav-container {border-radius: 25px;}}
 .logo {
   font-family: var(--font-display);
   font-weight: 700;
@@ -1536,6 +1538,7 @@ svg.line * {
     display: none !important;
   }
   .nav-links-mobile {
+    backdrop-filter: blur(10px) saturate(115%);
     display: flex;
     flex-direction: column;
     list-style: none;

@@ -26,6 +26,8 @@ export function AboutClient() {
 
   return (
     <>
+    <div className="bg-shape shape-1"></div>
+    <div className="bg-shape shape-2"></div>
       <Header
         navHrefs={{
           beranda: "/#beranda",

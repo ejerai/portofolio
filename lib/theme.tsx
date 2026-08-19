@@ -1,5 +1,5 @@
 "use client";
-
+import { flushSync } from "react-dom";
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 export type Theme = "dark" | "light";
@@ -32,11 +32,7 @@ function syncThemeColorMeta(theme: Theme): void {
   meta.setAttribute("content", theme === "dark" ? "#1e1510" : "#f5f0e8");
 }
 
-/**
- * Wraps the app and owns the current dark/light theme. The initial value is
- * read straight from `data-theme` on <html>, which the blocking inline
- * script in the root layout already set before hydration (no flash).
- */
+/* dark mode */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(readInitialTheme);
   const reducedMotionRef = useRef(false);
@@ -61,8 +57,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     if (typeof (document as unknown as { startViewTransition?: (cb: () => void) => void }).startViewTransition === "function") {
-      (document as unknown as { startViewTransition: (cb: () => void) => void }).startViewTransition(() =>
-        applyTheme(next),
+        (document as unknown as { startViewTransition: (cb: () => void) => void }).startViewTransition(() =>
+        flushSync(() => applyTheme(next)),
       );
       return;
     }

@@ -2,8 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-/** Types out its own text content once it scrolls into view, then leaves a
- * blinking cursor — same behavior as the original vanilla implementation. */
 export function SectionTypewriter({ text }: { text: string }) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
