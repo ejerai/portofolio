@@ -136,12 +136,23 @@ export function Header({
       positionMobileNav();
     }
 
+    let ticking = false;
+    function onScrollThrottled(): void {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        onScroll();
+        ticking = false;
+      });
+    }
+
     positionMobileNav();
+    onScroll();
     window.addEventListener("resize", positionMobileNav);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScrollThrottled, { passive: true });
     return () => {
       window.removeEventListener("resize", positionMobileNav);
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onScrollThrottled);
     };
   }, [enableMobileNavPositioning]);
 
