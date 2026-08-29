@@ -912,10 +912,19 @@ svg.line * {
   border: 1px solid var(--border-main);
   color: var(--ink-secondary);
   letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   transition:
     background 0.2s,
     border-color 0.2s,
     color 0.2s;
+}
+.folder-tag-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 .folder-card:hover .folder-tag {
   background: rgba(200, 146, 42, 0.08);
@@ -1251,6 +1260,11 @@ svg.line * {
   width: 7px;
   height: 7px;
   border-radius: 50%;
+  flex-shrink: 0;
+}
+.modal-tech-icon {
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
 }
 .modal-actions {
@@ -1938,7 +1952,12 @@ svg.line * {
   }
 }
 
-/* theme wipe transition */
+/* Theme wipe transition — powered by the View Transitions API.
+   Dark  -> wipes DOWN  (top to bottom)
+   Light -> wipes UP    (bottom to top)
+   Falls back to an instant swap automatically on browsers
+   without View Transitions support — no JS feature-check needed
+   on the CSS side. */
 
 ::view-transition-group(root) {
   animation-duration: 0.95s;
@@ -1975,6 +1994,9 @@ svg.line * {
   ::view-transition-group(root) { animation-duration: 0.001s !important; }
 }
 
+/* Fallback wipe curtain — browsers without View Transitions support.
+   Same direction language as the View Transitions version above:
+   dark = wipes down from the top, light = wipes up from the bottom. */
 .theme-curtain {
   position: fixed;
   inset: 0;

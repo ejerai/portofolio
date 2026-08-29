@@ -2,6 +2,7 @@
 
 import React from "react";
 import type { Project } from "@/types/project";
+import { TechIcon } from "@/components/Techicon";
 
 function CloseIcon() {
   return (
@@ -80,7 +81,7 @@ export function ProjectModal({ project, stampNumber, isOpen, onClose }: ProjectM
             <div className="modal-tech-grid">
               {project.chips.map((chip) => (
                 <div className="modal-tech-chip" key={chip.label}>
-                  <span className="modal-tech-dot" style={{ background: chip.color }}></span>
+                  <TechIcon label={chip.label} className="modal-tech-icon" style={{ color: chip.color }} />
                   {chip.label}
                 </div>
               ))}

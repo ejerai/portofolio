@@ -2,6 +2,7 @@
 
 import React from "react";
 import type { Project } from "@/types/project";
+import { TechIcon } from "@/components/Techicon";
 
 function FolderMainIcon() {
   return (
@@ -66,6 +67,7 @@ export function ProjectCard({ project, onOpen }: { project: Project; onOpen: (id
           <div className="folder-tags">
             {project.tags.map((tag) => (
               <span className="folder-tag" key={tag}>
+                <TechIcon label={tag} className="folder-tag-icon" />
                 {tag}
               </span>
             ))}
