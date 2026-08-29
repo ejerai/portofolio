@@ -56,15 +56,24 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    if (typeof (document as unknown as { startViewTransition?: (cb: () => void) => void }).startViewTransition === "function") {
-        (document as unknown as { startViewTransition: (cb: () => void) => void }).startViewTransition(() =>
-        flushSync(() => applyTheme(next)),
-      );
+    const root = document.documentElement;
+    const startViewTransition = (
+      document as unknown as {
+        startViewTransition?: (cb: () => void) => { finished: Promise<void> };
+      }
+    ).startViewTransition;
+
+    if (typeof startViewTransition === "function") {
+      root.setAttribute("data-theme-transition", next === "dark" ? "to-dark" : "to-light");
+      const transition = startViewTransition.call(document, () => flushSync(() => applyTheme(next)));
+      transition.finished
+        .catch(() => {})
+        .finally(() => root.removeAttribute("data-theme-transition"));
       return;
     }
 
     const curtain = document.createElement("div");
-    curtain.className = "theme-curtain";
+    curtain.className = `theme-curtain theme-curtain--${next}`;
     curtain.style.background = CURTAIN_COLOR[next] ?? CURTAIN_COLOR.dark;
     document.body.appendChild(curtain);
 
@@ -73,8 +82,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setTimeout(() => {
         applyTheme(next);
         curtain.classList.add("is-out");
-        setTimeout(() => curtain.remove(), 480);
-      }, 380);
+        setTimeout(() => curtain.remove(), 700);
+      }, 550);
     });
   }, [applyTheme]);
 

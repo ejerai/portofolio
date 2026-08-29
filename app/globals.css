@@ -616,43 +616,6 @@ header.scrolled {
     transition: none;
   }
 }
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-new(root),
-  ::view-transition-old(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
-  ::view-transition-old(root) {
-    z-index: 1;
-  }
-  ::view-transition-new(root) {
-    z-index: 2;
-    animation: 0.6s cubic-bezier(0.65, 0, 0.35, 1) tt-curtain-down;
-  }
-}
-@keyframes tt-curtain-down {
-  from {
-    clip-path: inset(0 0 100% 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-.theme-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  transform: translateY(-100%);
-  pointer-events: none;
-  will-change: transform;
-  transition: transform 0.42s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.theme-curtain.is-down {
-  transform: translateY(0);
-}
-.theme-curtain.is-out {
-  transform: translateY(100%);
-}
 .hero-section {
   min-height: 100vh;
   align-items: center;
@@ -1972,5 +1935,78 @@ svg.line * {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* theme wipe transition */
+
+::view-transition-group(root) {
+  animation-duration: 0.95s;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+:root[data-theme-transition="to-dark"]::view-transition-new(root) {
+  animation: liquid-wipe-down 0.95s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+:root[data-theme-transition="to-light"]::view-transition-new(root) {
+  animation: liquid-wipe-up 0.95s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes liquid-wipe-down {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
+}
+@keyframes liquid-wipe-up {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0 0 0% 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root) { animation-duration: 0.001s !important; }
+}
+
+.theme-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  transform: scaleY(0);
+  transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+  contain: strict;
+  backface-visibility: hidden;
+}
+.theme-curtain--dark {
+  transform-origin: top;
+}
+.theme-curtain--light {
+  transform-origin: bottom;
+}
+.theme-curtain.is-down {
+  transform: scaleY(1);
+}
+.theme-curtain--dark.is-out {
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition-duration: 0.7s;
+}
+.theme-curtain--light.is-out {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition-duration: 0.7s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-curtain {
+    transition-duration: 0.001s;
   }
 }
