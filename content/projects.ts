@@ -23,7 +23,7 @@ export const projects: Project[] = [
   {
     id: "bstp",
     ariaLabel: "Buka detail BSTP",
-    tabLabel: "Client Project",
+    tabLabel: "Project",
     titleLines: ["Company Profile & Katalog Produk"],
     meta: "PT. Bintang Surya Teknik Persada",
     tags: ["Astro", "Tailwind CSS", "JavaScript"],
