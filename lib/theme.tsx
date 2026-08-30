@@ -36,9 +36,17 @@ function syncThemeColorMeta(theme: Theme): void {
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(readInitialTheme);
   const reducedMotionRef = useRef(false);
+  const isTransitioningRef = useRef(false);
+  const timersRef = useRef<number[]>([]);
 
   useEffect(() => {
     reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach((id) => clearTimeout(id));
+    };
   }, []);
 
   const applyTheme = useCallback((next: Theme) => {
@@ -49,6 +57,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toggleTheme = useCallback(() => {
+    if (isTransitioningRef.current) return;
+
     const next: Theme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
 
     if (reducedMotionRef.current) {
@@ -63,15 +73,34 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       }
     ).startViewTransition;
 
+    const release = () => {
+      isTransitioningRef.current = false;
+    };
+
     if (typeof startViewTransition === "function") {
-      root.setAttribute("data-theme-transition", next === "dark" ? "to-dark" : "to-light");
-      const transition = startViewTransition.call(document, () => flushSync(() => applyTheme(next)));
-      transition.finished
-        .catch(() => {})
-        .finally(() => root.removeAttribute("data-theme-transition"));
+      isTransitioningRef.current = true;
+      try {
+        root.setAttribute("data-theme-transition", next === "dark" ? "to-dark" : "to-light");
+        const transition = startViewTransition.call(document, () => flushSync(() => applyTheme(next)));
+        transition.finished
+          .catch(() => {})
+          .finally(() => {
+            root.removeAttribute("data-theme-transition");
+            release();
+          });
+      } catch {
+        root.removeAttribute("data-theme-transition");
+        applyTheme(next);
+        release();
+      }
       return;
     }
 
+    timersRef.current.forEach((id) => clearTimeout(id));
+    timersRef.current = [];
+    document.querySelectorAll(".theme-curtain").forEach((el) => el.remove());
+
+    isTransitioningRef.current = true;
     const curtain = document.createElement("div");
     curtain.className = `theme-curtain theme-curtain--${next}`;
     curtain.style.background = CURTAIN_COLOR[next] ?? CURTAIN_COLOR.dark;
@@ -79,11 +108,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     requestAnimationFrame(() => {
       curtain.classList.add("is-down");
-      setTimeout(() => {
+      const t1 = window.setTimeout(() => {
         applyTheme(next);
         curtain.classList.add("is-out");
-        setTimeout(() => curtain.remove(), 700);
+        const t2 = window.setTimeout(() => {
+          curtain.remove();
+          release();
+        }, 700);
+        timersRef.current.push(t2);
       }, 550);
+      timersRef.current.push(t1);
     });
   }, [applyTheme]);
 
