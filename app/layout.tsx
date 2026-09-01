@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/lib/theme";
+import { ThemeProvider } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ezrarahmaditya.vercel.app"),
   title: {
     default: "Ezra Rahmaditya",
-    template: "%s | Ezra Rahmaditya",
+    template: "%s - Ezra Rahmaditya",
   },
   description:
     "Portofolio Ezra Rahmaditya, mahasiswa Teknik Informatika Universitas Budi Luhur yang berfokus pada pengembangan front-end dan software engineering.",
