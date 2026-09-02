@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Header, BackToTop, FooterBar } from "@/components/Shared";
+import { Header, BackToTop, FooterBar, MailtoLink } from "@/components/Shared";
 import { useRevealOnScroll } from "@/lib/site";
 import type { EspCategory, EspItem } from "@/types/site";
 import { espData } from "@/content/site";
@@ -795,7 +795,7 @@ export function AboutClient() {
                 <div className="about-row">
                   <span className="about-key">Kontak</span>
                   <span className="about-val">
-                    <a href="mailto:ezrarahmadityaa@gmail.com">ezrarahmadityaa@gmail.com</a>
+                    <MailtoLink email="ezrarahmadityaa@gmail.com">ezrarahmadityaa@gmail.com</MailtoLink>
                   </span>
                 </div>
                 <div className="about-row">

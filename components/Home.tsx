@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Header, BackToTop, HeroGreeting, SectionTypewriter, FooterBar, TechIcon } from "@/components/Shared";
+import { Header, BackToTop, HeroGreeting, SectionTypewriter, FooterBar, TechIcon, MailtoLink } from "@/components/Shared";
 import { useRevealOnScroll } from "@/lib/site";
 import { projects } from "@/content/site";
 import type { Project } from "@/types/site";
@@ -265,9 +265,9 @@ export function HomeClient() {
             <h2>
               Kontak<span className="highlight">.</span>
             </h2>
-            <a href="mailto:ezrarahmadityaa@gmail.com" className="btn-primary">
+            <MailtoLink email="ezrarahmadityaa@gmail.com" className="cf-social-btn" ariaLabel="Email">
               Hubungi Saya
-            </a>
+            </MailtoLink>
           </div>
         </div>
 

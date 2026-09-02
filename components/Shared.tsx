@@ -4,6 +4,34 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "@/lib/site";
 
+export function MailtoLink({
+  email,
+  className,
+  ariaLabel,
+  children,
+  subject,
+}: {
+  email: string;
+  className?: string;
+  ariaLabel?: string;
+  children: React.ReactNode;
+  subject?: string;
+}) {
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}${
+      subject ? `&su=${encodeURIComponent(subject)}` : ""
+    }`;
+    window.open(gmailUrl, "_blank", "noopener,noreferrer");
+  }
+
+  return (
+    <a href={`mailto:${email}`} className={className} aria-label={ariaLabel} onClick={handleClick}>
+      {children}
+    </a>
+  );
+}
+
 /* icon svg */
 
 function normalizeTechLabel(label: string): string {
@@ -563,10 +591,10 @@ export function FooterBar() {
       </div>
 
       <div className="cf-socials">
-        <a href="mailto:ezrarahmadityaa@gmail.com" className="cf-social-btn" aria-label="Email">
+        <MailtoLink email="ezrarahmadityaa@gmail.com" className="cf-social-btn" ariaLabel="Email">
           <EmailIcon />
           Email
-        </a>
+        </MailtoLink>
         <a href="https://github.com/ejerai" target="_blank" rel="noopener" className="cf-social-btn" aria-label="GitHub">
           <GithubIcon />
           GitHub
