@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Header, BackToTop, HeroGreeting, SectionTypewriter, FooterBar, TechIcon, MailtoLink } from "@/components/Shared";
+import { Header, BackToTop, HeroGreeting, SectionTypewriter, FooterBar, TechIcon, MailtoLink, SCROLL_TARGET_KEY} from "@/components/Shared";
 import { useRevealOnScroll } from "@/lib/site";
 import { projects } from "@/content/site";
 import type { Project } from "@/types/site";
@@ -188,6 +188,16 @@ function ProjectModal({ project, stampNumber, isOpen, onClose }: ProjectModalPro
 export function HomeClient() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
   useRevealOnScroll();
+  
+  useEffect(() => {
+  const target = sessionStorage.getItem(SCROLL_TARGET_KEY);
+  if (!target) return;
+  sessionStorage.removeItem(SCROLL_TARGET_KEY);
+  const el = document.getElementById(target);
+  if (el) {
+    requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
+  }
+}, []);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent): void {
@@ -203,7 +213,7 @@ export function HomeClient() {
       <div className="bg-shape shape-2"></div>
 
       <Header
-        navHrefs={{ beranda: "#beranda", tentang: "/about", proyek: "#proyek", kontak: "#kontak" }}
+        navHrefs={{ beranda: "#beranda", tentang: "/about", proyek: "#proyek", kontak: "about#kontak" }}
         enableMobileNavPositioning
         closeMobileNavOnButtonClick
       />

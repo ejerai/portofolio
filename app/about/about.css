@@ -8,12 +8,14 @@
   --text-secondary-new: #5a5550;
   --accent-terracotta: #a38771;
   --accent-terra-hover: #8a705c;
+  --navlink-active: #d4a030;
 }
 [data-theme="dark"] {
   --text-primary-new: #f0ead8;
   --text-secondary-new: #b9ac98;
   --accent-terracotta: #c89a7e;
   --accent-terra-hover: #d9ad8e;
+  --navlink-active: #ffffff;
 }
 .about-name,
 body,
@@ -50,7 +52,7 @@ h3 {
 }
 .about-name em {
   font-style: italic;
-  color: var(--accent-terracotta);
+  color: #d4a030;
 }
 .about-list {
   display: flex;

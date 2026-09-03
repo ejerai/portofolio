@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Header, BackToTop, FooterBar, MailtoLink } from "@/components/Shared";
+import { Header, BackToTop, FooterBar, MailtoLink, SCROLL_TARGET_KEY } from "@/components/Shared";
 import { useRevealOnScroll } from "@/lib/site";
 import type { EspCategory, EspItem } from "@/types/site";
 import { espData } from "@/content/site";
@@ -686,7 +686,7 @@ function ContactForm() {
   }
 
   return (
-    <div className="kontak-card reveal reveal-up" style={{ ["--reveal-delay" as string]: "0.2s" }}>
+    <div id="kontak" className="kontak-card reveal reveal-up" style={{ ["--reveal-delay" as string]: "0.2s" }}>
       <div className="kontak-card-head">
         <h3 className="about-title">
           Kontak<span className="kontak-dot">.</span>
@@ -749,6 +749,16 @@ export function AboutClient() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  useEffect(() => {
+  const target = sessionStorage.getItem(SCROLL_TARGET_KEY);
+  if (!target) return;
+  sessionStorage.removeItem(SCROLL_TARGET_KEY);
+  const el = document.getElementById(target);
+  if (el) {
+    requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
+  }
+}, []);
+
   return (
     <>
     <div className="bg-shape shape-1"></div>
@@ -758,7 +768,7 @@ export function AboutClient() {
           beranda: "/#beranda",
           tentang: "/about",
           proyek: "/#proyek",
-          kontak: "/#kontak",
+          kontak: "#kontak",
         }}
         activeItem="tentang"
       />
@@ -885,7 +895,7 @@ export function AboutClient() {
         onClose={() => setActiveModal(null)}
       />
 
-      <section id="kontak" className="contact-footer-section">
+      <section id="kontak-footer" className="contact-footer-section">
         <FooterBar />
       </section>
 

@@ -382,6 +382,29 @@ function KontakIcon() {
   );
 }
 
+export const SCROLL_TARGET_KEY = "pendingScrollTarget";
+
+function handleNavAnchorClick(e: React.MouseEvent<HTMLAnchorElement>, href: string): void {
+  const hashIndex = href.indexOf("#");
+  if (hashIndex === -1) return;
+
+  const path = href.slice(0, hashIndex);
+  const id = href.slice(hashIndex + 1);
+
+  if (!path) {
+    const el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+    return;
+  }
+
+  e.preventDefault();
+  sessionStorage.setItem(SCROLL_TARGET_KEY, id);
+  window.location.assign(path);
+}
+
 const NAV_ITEMS: { key: keyof NavHrefs; label: string; Icon: () => React.JSX.Element }[] = [
   { key: "beranda", label: "Beranda", Icon: BerandaIcon },
   { key: "tentang", label: "Tentang", Icon: TentangIcon },
@@ -394,7 +417,7 @@ function NavList({ navHrefs, activeItem }: { navHrefs: NavHrefs; activeItem?: ke
     <>
       {NAV_ITEMS.map(({ key, label, Icon }) => (
         <li key={key}>
-          <a href={navHrefs[key]} style={activeItem === key ? { color: "var(--accent-terracotta)" } : undefined}>
+          <a href={navHrefs[key]}style={activeItem === key ? { color: "var(--navlink-active)" } : undefined}onClick={(e) => handleNavAnchorClick(e, navHrefs[key])}>
             <span className="nav-icon">
               <Icon />
             </span>
