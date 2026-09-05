@@ -270,17 +270,6 @@ export function HomeClient() {
       </section>
 
       <section id="kontak" className="contact-footer-section">
-        <div className="cf-container">
-          <div className="cf-cta reveal reveal-up">
-            <h2>
-              Kontak<span className="highlight">.</span>
-            </h2>
-            <MailtoLink email="ezrarahmadityaa@gmail.com" className="cf-social-btn" ariaLabel="Email">
-              Hubungi Saya
-            </MailtoLink>
-          </div>
-        </div>
-
         <div className="cf-divider"></div>
 
         <FooterBar />
