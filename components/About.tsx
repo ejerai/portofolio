@@ -796,11 +796,11 @@ export function AboutClient() {
                 </div>
                 <div className="about-row">
                   <span className="about-key">Keahlian</span>
-                  <span className="about-val">HTML · CSS · JavaScript · Next.js · Python · PHP · Typescript · Astro</span>
+                  <span className="about-val">HTML · CSS · JavaScript · Next.js · Python · PHP · Typescript · Astro · SEO Friendly</span>
                 </div>
                 <div className="about-row">
                   <span className="about-key">Status</span>
-                  <span className="about-val">Aktif Kuliah Semester 4</span>
+                  <span className="about-val">Aktif Kuliah Semester 5</span>
                 </div>
                 <div className="about-row">
                   <span className="about-key">Kontak</span>
