@@ -318,7 +318,6 @@ interface NavHrefs {
 interface HeaderProps {
   navHrefs: NavHrefs;
   activeItem?: keyof NavHrefs;
-  enableMobileNavPositioning?: boolean;
   closeMobileNavOnButtonClick?: boolean;
 }
 
@@ -417,7 +416,11 @@ function NavList({ navHrefs, activeItem }: { navHrefs: NavHrefs; activeItem?: ke
     <>
       {NAV_ITEMS.map(({ key, label, Icon }) => (
         <li key={key}>
-          <a href={navHrefs[key]}style={activeItem === key ? { color: "var(--navlink-active)" } : undefined}onClick={(e) => handleNavAnchorClick(e, navHrefs[key])}>
+          <a
+            href={navHrefs[key]}
+            style={activeItem === key ? { color: "var(--navlink-active)" } : undefined}
+            onClick={(e) => handleNavAnchorClick(e, navHrefs[key])}
+          >
             <span className="nav-icon">
               <Icon />
             </span>
@@ -432,69 +435,37 @@ function NavList({ navHrefs, activeItem }: { navHrefs: NavHrefs; activeItem?: ke
   );
 }
 
-export function Header({
-  navHrefs,
-  activeItem,
-  enableMobileNavPositioning = false,
-  closeMobileNavOnButtonClick = false,
-}: HeaderProps) {
+export function Header({ navHrefs, activeItem, closeMobileNavOnButtonClick = false }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null);
-  const mobileNavRef = useRef<HTMLUListElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // header gets its "scrolled" look after 50px
   useEffect(() => {
-    function positionMobileNav(): void {
-      if (!enableMobileNavPositioning) return;
-      const header = headerRef.current;
-      const mobileNav = mobileNavRef.current;
-      const navContainer = header?.querySelector<HTMLElement>(".nav-container");
-      if (!navContainer || !mobileNav || window.innerWidth > 768) return;
-      const rect = navContainer.getBoundingClientRect();
-      mobileNav.style.top = `${rect.bottom + 8}px`;
-      mobileNav.style.right = "20px";
-      mobileNav.style.left = "auto";
-    }
-
-    function onScroll(): void {
-      const isScrolled = window.scrollY > 50;
-      setScrolled(isScrolled);
-      document.body.classList.toggle("header-scrolled", isScrolled);
-      positionMobileNav();
-    }
-
     let ticking = false;
-    function onScrollThrottled(): void {
+    const update = () => {
+      ticking = false;
+      setScrolled(window.scrollY > 50);
+    };
+    const onScroll = () => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(() => {
-        onScroll();
-        ticking = false;
-      });
-    }
-
-    positionMobileNav();
-    onScroll();
-    window.addEventListener("resize", positionMobileNav);
-    window.addEventListener("scroll", onScrollThrottled, { passive: true });
-    return () => {
-      window.removeEventListener("resize", positionMobileNav);
-      window.removeEventListener("scroll", onScrollThrottled);
+      requestAnimationFrame(update);
     };
-  }, [enableMobileNavPositioning]);
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
+  // tap outside
   useEffect(() => {
-    function onDocClick(e: MouseEvent): void {
-      const header = headerRef.current;
-      const mobileNav = mobileNavRef.current;
-      const target = e.target as Node;
-      if (header && mobileNav && !header.contains(target) && !mobileNav.contains(target)) {
-        setMenuOpen(false);
-      }
-    }
+    if (!menuOpen) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setMenuOpen(false);
+    };
     document.addEventListener("click", onDocClick);
     return () => document.removeEventListener("click", onDocClick);
-  }, []);
+  }, [menuOpen]);
 
   return (
     <header id="mainHeader" ref={headerRef} className={scrolled ? "scrolled" : undefined}>
@@ -513,10 +484,9 @@ export function Header({
           id="menuToggle"
           className={`menu-toggle${menuOpen ? " open" : ""}`}
           aria-label="Buka Menu"
-          onClick={(e) => {
-            e.stopPropagation();
-            setMenuOpen((open) => !open);
-          }}
+          aria-expanded={menuOpen}
+          aria-controls="navLinksMobile"
+          onClick={() => setMenuOpen((open) => !open)}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line className="line line-top" x1="4" y1="6" x2="20" y2="6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
@@ -531,8 +501,6 @@ export function Header({
       <ul
         className={`nav-links-mobile${menuOpen ? " open" : ""}`}
         id="navLinksMobile"
-        ref={mobileNavRef}
-        style={enableMobileNavPositioning ? undefined : { top: "82px", right: "20px", left: "auto" }}
         onClick={(e) => {
           if (closeMobileNavOnButtonClick || (e.target as HTMLElement).closest("a")) {
             setMenuOpen(false);

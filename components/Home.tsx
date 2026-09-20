@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Header, BackToTop, HeroGreeting, SectionTypewriter, FooterBar, TechIcon, MailtoLink, SCROLL_TARGET_KEY} from "@/components/Shared";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Header, BackToTop, HeroGreeting, SectionTypewriter, FooterBar, TechIcon, SCROLL_TARGET_KEY } from "@/components/Shared";
 import { useRevealOnScroll } from "@/lib/site";
 import { projects } from "@/content/site";
 import type { Project } from "@/types/site";
@@ -30,15 +30,30 @@ function OpenHintChevron() {
   );
 }
 
+/* gambar modal baru */
+const preloaded = new Set<string>();
+
+function preloadImage(src: string): void {
+  if (preloaded.has(src)) return;
+  preloaded.add(src);
+  const img = new Image();
+  img.src = src;
+  img.decode?.().catch(() => {});
+}
+
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: (id: string) => void }) {
+  const warmUp = () => preloadImage(project.img);
+
   return (
     <div
       className="folder-card reveal reveal-left"
-      data-project={project.id}
       role="button"
       tabIndex={0}
       aria-label={project.ariaLabel}
       onClick={() => onOpen(project.id)}
+      onPointerEnter={warmUp}
+      onTouchStart={warmUp}
+      onFocus={warmUp}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -86,7 +101,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (id: strin
   );
 }
 
-/* project modal (lightbox project) */
+/* project modal */
 
 function CloseIcon() {
   return (
@@ -111,35 +126,67 @@ function ExternalLinkIcon() {
   );
 }
 
+// harus sama dengan durasi transisi opacity .project-modal di globals.css
+const MODAL_CLOSE_MS = 220;
+
 interface ProjectModalProps {
   project: Project;
   stampNumber: number;
-  isOpen: boolean;
-  onClose: () => void;
+  onClosed: () => void;
 }
 
-function ProjectModal({ project, stampNumber, isOpen, onClose }: ProjectModalProps) {
+/* satu modal DOM transisi */
+function ProjectModal({ project, stampNumber, onClosed }: ProjectModalProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<number | null>(null);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    void rootRef.current?.offsetHeight; // paksa hitung style "tertutup" dulu
+    setOpen(true);
+    document.documentElement.classList.add("modal-open");
+    return () => {
+      document.documentElement.classList.remove("modal-open");
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    };
+  }, []);
+
+  const close = useCallback(() => {
+    if (closeTimer.current !== null) return;
+    setOpen(false);
+    closeTimer.current = window.setTimeout(onClosed, MODAL_CLOSE_MS);
+  }, [onClosed]);
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent): void {
+      if (e.key === "Escape") close();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [close]);
+
   return (
     <div
-      className={`project-modal${isOpen ? " open" : ""}`}
-      id={`modal-${project.id}`}
+      ref={rootRef}
+      className={`project-modal${open ? " open" : ""}`}
       role="dialog"
       aria-modal="true"
       aria-label={project.ariaLabel}
     >
-      <div className="modal-backdrop" onClick={onClose}></div>
+      <div className="modal-backdrop" onClick={close}></div>
       <div className="modal-dossier">
         <div className="modal-dossier-header">
           <div className="modal-dossier-stamp">{String(stampNumber).padStart(2, "0")}</div>
           <div className="modal-dossier-ref">{project.refYear}</div>
-          <button className="modal-close" aria-label="Tutup" onClick={onClose}>
+          <button className="modal-close" aria-label="Tutup" onClick={close}>
             <CloseIcon />
           </button>
         </div>
 
         <div className="modal-img-float">
           <div className="modal-img-placeholder">
-            <img src={project.img} alt={project.imgAlt} />
+            <img src={project.img} alt={project.imgAlt} decoding="async" />
           </div>
         </div>
 
@@ -183,29 +230,24 @@ function ProjectModal({ project, stampNumber, isOpen, onClose }: ProjectModalPro
   );
 }
 
-/* beranda ku.*/
+/* beranda */
 
 export function HomeClient() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
   useRevealOnScroll();
-  
-  useEffect(() => {
-  const target = sessionStorage.getItem(SCROLL_TARGET_KEY);
-  if (!target) return;
-  sessionStorage.removeItem(SCROLL_TARGET_KEY);
-  const el = document.getElementById(target);
-  if (el) {
-    requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
-  }
-}, []);
 
   useEffect(() => {
-    function onKeyDown(e: KeyboardEvent): void {
-      if (e.key === "Escape") setActiveProject(null);
+    const target = sessionStorage.getItem(SCROLL_TARGET_KEY);
+    if (!target) return;
+    sessionStorage.removeItem(SCROLL_TARGET_KEY);
+    const el = document.getElementById(target);
+    if (el) {
+      requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
     }
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
+
+  const closeProject = useCallback(() => setActiveProject(null), []);
+  const activeIndex = projects.findIndex((p) => p.id === activeProject);
 
   return (
     <>
@@ -214,7 +256,6 @@ export function HomeClient() {
 
       <Header
         navHrefs={{ beranda: "#beranda", tentang: "/about", proyek: "#proyek", kontak: "about#kontak" }}
-        enableMobileNavPositioning
         closeMobileNavOnButtonClick
       />
 
@@ -257,15 +298,14 @@ export function HomeClient() {
             ))}
           </div>
 
-          {projects.map((project, i) => (
+          {activeIndex !== -1 && (
             <ProjectModal
-              key={project.id}
-              project={project}
-              stampNumber={i + 1}
-              isOpen={activeProject === project.id}
-              onClose={() => setActiveProject(null)}
+              key={projects[activeIndex].id}
+              project={projects[activeIndex]}
+              stampNumber={activeIndex + 1}
+              onClosed={closeProject}
             />
-          ))}
+          )}
         </div>
       </section>
 

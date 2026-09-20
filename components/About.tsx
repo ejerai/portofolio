@@ -95,97 +95,6 @@ function EspFolderCard({ folder, tabLabel, ariaLabel, title, tags, onOpen }: Esp
 const espIconThumb =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>';
 
-function ensurePdfViewerStyles(): void {
-  if (document.getElementById("esp-pdf-style")) return;
-  const style = document.createElement("style");
-  style.id = "esp-pdf-style";
-  style.textContent = "@keyframes espFadeIn{from{opacity:0}to{opacity:1}}";
-  document.head.appendChild(style);
-}
-
-function openPdfViewer(url: string, title?: string): void {
-  ensurePdfViewerStyles();
-  document.getElementById("esp-pdf-viewer")?.remove();
-
-  const overlay = document.createElement("div");
-  overlay.id = "esp-pdf-viewer";
-  overlay.style.cssText = `
-    position:fixed;inset:0;z-index:9999;
-    background:rgba(15,10,5,0.88);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:1rem;animation:espFadeIn .2s ease;
-  `;
-
-  const toolbar = document.createElement("div");
-  toolbar.style.cssText = `
-    width:100%;max-width:860px;display:flex;align-items:center;
-    justify-content:space-between;padding:.5rem .75rem;
-    background:#1a1008;border-radius:10px 10px 0 0;
-    border-bottom:1px solid rgba(212,160,23,.25);
-  `;
-  toolbar.innerHTML = `
-    <span style="font-family:'Poppins',sans-serif;font-size:.8rem;
-      color:rgba(245,240,232,.65);letter-spacing:.04em;max-width:60%;
-      overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${title || "Sertifikat"}</span>
-    <div style="display:flex;gap:.5rem;align-items:center;">
-      <a id="esp-pdf-dl" href="${url}" download
-        style="display:inline-flex;align-items:center;gap:.35rem;
-          font-family:'Poppins',sans-serif;font-size:.75rem;font-weight:500;
-          color:#d4a017;text-decoration:none;
-          border:1px solid rgba(212,160,23,.4);border-radius:6px;
-          padding:.3rem .65rem;transition:all .2s;"
-        onmouseover="this.style.background='rgba(212,160,23,.12)'"
-        onmouseout="this.style.background='transparent'">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>Download
-      </a>
-      <button id="esp-pdf-close"
-        style="background:none;border:1px solid rgba(245,240,232,.2);border-radius:6px;
-          cursor:pointer;color:rgba(245,240,232,.7);padding:.3rem .5rem;
-          display:flex;align-items:center;transition:all .2s;"
-        onmouseover="this.style.borderColor='rgba(245,240,232,.5)';this.style.color='#f5f0e8'"
-        onmouseout="this.style.borderColor='rgba(245,240,232,.2)';this.style.color='rgba(245,240,232,.7)'"
-        aria-label="Tutup PDF">
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-    </div>
-  `;
-
-  const frame = document.createElement("iframe");
-  frame.src = url;
-  frame.style.cssText = `
-    width:100%;max-width:860px;height:min(80vh,640px);
-    border:none;background:#fff;border-radius:0 0 10px 10px;display:block;
-  `;
-
-  overlay.appendChild(toolbar);
-  overlay.appendChild(frame);
-  document.body.appendChild(overlay);
-  document.body.style.overflow = "hidden";
-
-  const close = (): void => {
-    overlay.remove();
-    document.body.style.overflow = "";
-  };
-
-  document.getElementById("esp-pdf-close")?.addEventListener("click", close);
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) close();
-  });
-  document.addEventListener("keydown", function onKeydown(e: KeyboardEvent) {
-    if (e.key === "Escape") {
-      close();
-      document.removeEventListener("keydown", onKeydown);
-    }
-  });
-}
-
 function openImageLightbox(category: EspCategory): void {
   const photoEl = document.getElementById(`photo-${category}`);
   const img = photoEl?.querySelector<HTMLImageElement>("img");
@@ -224,56 +133,6 @@ function EspGallery({ category, fileLabel, title, isOpen, onClose }: EspGalleryP
   const items = espData[category];
   const [selected, setSelected] = useState(0);
   const current: EspItem | undefined = items[selected];
-
-  // rebuild pdf
-  useEffect(() => {
-    const photoEl = document.getElementById(`photo-${category}`);
-    if (!photoEl) return;
-    photoEl.querySelector(".esp-pdf-btn")?.remove();
-    if (!current?.pdf) return;
-
-    const chip = document.createElement("div");
-    chip.className = "esp-pdf-btn";
-    chip.style.cssText = "position:absolute;top:.6rem;right:.6rem;display:flex;gap:.35rem;z-index:5;";
-    chip.innerHTML = `
-      <button class="esp-pdf-view-btn"
-        style="display:inline-flex;align-items:center;gap:.3rem;
-          font-family:'Poppins',sans-serif;font-size:.7rem;font-weight:500;
-          color:#d4a017;background:rgba(15,10,5,.82);
-          border:1px solid rgba(212,160,23,.35);border-radius:6px;
-          padding:.28rem .55rem;cursor:pointer;backdrop-filter:blur(6px);
-          transition:all .2s;white-space:nowrap;"
-        onmouseover="this.style.background='rgba(212,160,23,.18)'"
-        onmouseout="this.style.background='rgba(15,10,5,.82)'"
-        title="Lihat PDF">
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-        </svg>Lihat PDF
-      </button>
-      <a class="esp-pdf-dl-btn" href="${current.pdf}" download
-        style="display:inline-flex;align-items:center;gap:.3rem;
-          font-family:'Poppins',sans-serif;font-size:.7rem;font-weight:500;
-          color:rgba(245,240,232,.8);background:rgba(15,10,5,.82);
-          border:1px solid rgba(245,240,232,.2);border-radius:6px;
-          padding:.28rem .55rem;text-decoration:none;backdrop-filter:blur(6px);
-          transition:all .2s;white-space:nowrap;"
-        onmouseover="this.style.borderColor='rgba(245,240,232,.5)'"
-        onmouseout="this.style.borderColor='rgba(245,240,232,.2)'"
-        title="Download PDF">
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>Download
-      </a>
-    `;
-    chip.querySelector(".esp-pdf-view-btn")?.addEventListener("click", () => {
-      openPdfViewer(current.pdf!, current.title);
-    });
-    photoEl.appendChild(chip);
-  }, [category, current, selected]);
 
   return (
     <div className={`project-modal${isOpen ? " open" : ""}`} id={`modal-${category}`} role="dialog" aria-modal="true" aria-label={title}>
@@ -326,8 +185,33 @@ function EspGallery({ category, fileLabel, title, isOpen, onClose }: EspGalleryP
                 <div className="esp-photo" id={`photo-${category}`}>
                   <img src={current?.img || ""} alt={current?.title || ""} id={`img-${category}`} className="esp-photo-img" />
                 </div>
-                <button className="esp-view-overlay" onClick={() => openImageLightbox(category)}>
-                  Lihat Penuh
+
+                {current?.pdf && (
+                  <a
+                    href={current.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="esp-pdf-link"
+                    aria-label="Buka sertifikat PDF di tab baru"
+                    title="Buka PDF di tab baru"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                )}
+
+                <button
+                  className="esp-view-overlay"
+                  onClick={() => openImageLightbox(category)}
+                  aria-label="Lihat gambar penuh"
+                  title="Lihat penuh"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                  </svg>
                 </button>
               </div>
               <div className="esp-info">
@@ -749,15 +633,21 @@ export function AboutClient() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  // kunci scroll halaman selama modal sertifikat terbuka
   useEffect(() => {
-  const target = sessionStorage.getItem(SCROLL_TARGET_KEY);
-  if (!target) return;
-  sessionStorage.removeItem(SCROLL_TARGET_KEY);
-  const el = document.getElementById(target);
-  if (el) {
-    requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
-  }
-}, []);
+    document.documentElement.classList.toggle("modal-open", activeModal !== null);
+    return () => document.documentElement.classList.remove("modal-open");
+  }, [activeModal]);
+
+  useEffect(() => {
+    const target = sessionStorage.getItem(SCROLL_TARGET_KEY);
+    if (!target) return;
+    sessionStorage.removeItem(SCROLL_TARGET_KEY);
+    const el = document.getElementById(target);
+    if (el) {
+      requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth" }));
+    }
+  }, []);
 
   return (
     <>

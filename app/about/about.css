@@ -142,9 +142,13 @@ h3 {
     transform 0.3s,
     box-shadow 0.3s;
 }
-.folder-card:focus,
-.folder-card:hover {
+.folder-card:focus-visible {
   transform: translateY(-4px);
+}
+@media (hover: hover) and (pointer: fine) {
+  .folder-card:hover {
+    transform: translateY(-4px);
+  }
 }
 .lightbox-overlay {
   position: fixed;
@@ -161,6 +165,7 @@ h3 {
 .lightbox-overlay img {
   max-width: 90vw;
   max-height: 90vh;
+  max-height: 90dvh;
   border-radius: 4px;
   object-fit: contain;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
@@ -182,6 +187,7 @@ h3 {
   width: 100%;
   max-width: 860px;
   max-height: 88vh;
+  max-height: 88dvh;
   overflow: hidden;
   border-radius: 10px;
   background: #1e1510;
@@ -190,13 +196,13 @@ h3 {
     0 0 0 1px rgba(200, 146, 42, 0.08),
     0 32px 80px rgba(0, 0, 0, 0.7),
     0 0 60px rgba(200, 146, 42, 0.06);
-  transform: translateY(24px) scale(0.96);
+  transform: translate3d(0, 24px, 0) scale(0.96);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
 .project-modal.open .dossier-espresso {
-  transform: translateY(0) scale(1);
+  transform: none;
 }
 .dossier-esp-hdr {
   background: var(--bg-dark-2, #241408);
@@ -256,15 +262,15 @@ h3 {
 .dossier-esp-body {
   display: grid;
   grid-template-columns: 1fr 280px;
+  grid-template-rows: minmax(0, 1fr);
   flex: 1;
+  min-height: 0;
   overflow: hidden;
-}
-.dossier-esp-body:has(.esp-preview[style*="display: none"]) {
-  grid-template-columns: 1fr;
 }
 .esp-list-wrap {
   border-right: 1px solid rgba(200, 146, 42, 0.1);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px 0;
   scrollbar-width: thin;
   scrollbar-color: rgba(200, 146, 42, 0.2) transparent;
@@ -340,6 +346,7 @@ h3 {
   flex-direction: column;
   background: #241408;
   overflow-y: auto;
+  overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: rgba(200, 146, 42, 0.15) transparent;
 }
@@ -368,37 +375,41 @@ h3 {
   position: absolute;
   inset: 0;
 }
-.esp-view-overlay {
+.esp-view-overlay,
+.esp-pdf-link {
   position: absolute;
-  bottom: 10px;
   right: 10px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 13px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   background: rgba(20, 10, 4, 0.85);
   border: 1px solid rgba(200, 146, 42, 0.35);
-  border-radius: 3px;
+  border-radius: 6px;
+  color: var(--accent-gold);
   cursor: pointer;
   z-index: 5;
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-gold);
+  backdrop-filter: blur(6px);
   transition:
     background 0.2s,
     border-color 0.2s;
-  min-height: 36px;
 }
-.esp-view-overlay:hover {
+.esp-view-overlay {
+  bottom: 10px;
+}
+.esp-pdf-link {
+  top: 10px;
+}
+.esp-view-overlay:hover,
+.esp-pdf-link:hover {
   background: rgba(200, 146, 42, 0.18);
   border-color: var(--accent-gold);
 }
-.esp-view-overlay svg {
-  width: 11px;
-  height: 11px;
+.esp-view-overlay svg,
+.esp-pdf-link svg {
+  width: 16px;
+  height: 16px;
 }
 .esp-info {
   padding: 18px 20px 24px;
@@ -449,6 +460,7 @@ h3 {
   .dossier-espresso {
     max-width: 85%;
     max-height: 90vh;
+    max-height: 90dvh;
   }
   .dossier-esp-body {
     grid-template-columns: 1fr 280px;
@@ -511,14 +523,16 @@ h3 {
     max-width: 100%;
     width: 100%;
     border-radius: 16px 16px 0 0;
-    max-height: 92vh;
+    max-height: 88vh;
+    max-height: 88dvh;
     border: none;
     border-top: 1px solid rgba(200, 146, 42, 0.25);
-    transform: translateY(100%);
+    box-shadow: none;
+    transform: translate3d(0, 100%, 0);
     transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .project-modal.open .dossier-espresso {
-    transform: translateY(0);
+    transform: none;
   }
   .dossier-esp-hdr::before {
     content: "";
@@ -536,39 +550,26 @@ h3 {
     padding-top: 22px;
   }
   .dossier-esp-body {
-    grid-template-columns: 1fr;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+  }
+  .esp-list-wrap {
+    flex: 0 0 auto;
+    max-height: 28vh;
+    max-height: 28dvh;
+    padding: 8px 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(200, 146, 42, 0.1);
+  }
+  .esp-preview {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .esp-photo {
+    max-height: 34vh;
+    max-height: 34dvh;
   }
 }
-.reveal {
-  opacity: 0;
-  transition:
-    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--reveal-delay, 0s);
-}
-.reveal-up {
-  transform: translateY(32px);
-}
-.reveal-left {
-  transform: translateX(-32px);
-}
-.reveal-right {
-  transform: translateX(32px);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-} 
 .pin-gallery {
   margin-top: 30px; 
 }
@@ -802,6 +803,7 @@ h3 {
   position: relative;
   max-width: min(90vw, 900px);
   max-height: 85vh;
+  max-height: 85dvh;
   margin: 0;
   z-index: 1;
   opacity: 0;
@@ -818,6 +820,7 @@ h3 {
   display: block;
   max-width: 100%;
   max-height: 85vh;
+  max-height: 85dvh;
   border-radius: 8px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
 }

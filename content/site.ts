@@ -149,7 +149,15 @@ export const projects: Project[] = [
 ];
 
 export const espData: EspData = {
-  akademik: [],
+  akademik: [
+    {
+      title: "Intro to Software Engineering",
+      meta: "RevoU",
+      img:"/gmi/image.webp",
+      pdf:"https://drive.google.com/file/d/1uBmFBuNdDHYDYsySoGTLtqVgHjPV-_1C/view",
+      desc:"Coding Camp Software Engineer by RevoU",
+    },
+  ],
   prestasi: [
     {
       title: "Taekwondo",

@@ -21,9 +21,9 @@ export interface Project {
 export interface EspItem {
   title: string;
   meta?: string;
-  img: string;
+  img?: string;
   pdf?: string;
-  desc: string;
+  desc?: string;
 }
 
 export type EspCategory = "akademik" | "prestasi";
