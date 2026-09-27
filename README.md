@@ -1,4 +1,4 @@
-This is my personal portfolio website, built with [Next.js](https://nextjs.org/) (App Router) and TypeScript, bootstrapped with `create-next-app`.
+This is a [Next.js](https://nextjs.org/) (App Router) and TypeScript, bootstrapped with `create-next-app`.
 
 ## Getting Started
 
@@ -19,17 +19,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying files inside `app/`. The page auto-updates as you edit the file.
 
-## Project Structure
-
-```
-├── app/          # App Router pages, layouts, and routing
-├── components/   # Reusable UI components
-├── content/       # Portfolio content (projects, data, etc.)
-├── lib/          # Utilities and helper functions
-├── public/       # Static assets (images, icons, etc.)
-└── types/        # TypeScript type definitions
-```
-
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -44,8 +33,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Contact
-
-- GitHub: [@ejerai](https://github.com/ejerai)
-- Email: ezrarahmadityaa@gmail.com
