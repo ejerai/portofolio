@@ -1,14 +1,4 @@
-# Ezra Rahmaditya — Portfolio
-
 This is my personal portfolio website, built with [Next.js](https://nextjs.org/) (App Router) and TypeScript, bootstrapped with `create-next-app`.
-
-🔗 Live: [ezrarahmaditya.vercel.app](https://ezrarahmaditya.vercel.app)
-
-## Tech Stack
-
-- [Next.js 16](https://nextjs.org/) — React framework (App Router)
-- [React 19](https://react.dev/) + TypeScript
-- ESLint for linting
 
 ## Getting Started
 
