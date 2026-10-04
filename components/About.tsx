@@ -518,6 +518,14 @@ function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
+  // neon berkedip tiap kali user mengetik (satu siklus kedip selesai dulu sebelum mulai lagi)
+  function handleNeonFlicker(e: React.FormEvent<HTMLFormElement>): void {
+    const field = (e.target as HTMLElement).closest<HTMLElement>(".kontak-field");
+    if (!field || field.classList.contains("is-flicker")) return;
+    field.classList.add("is-flicker");
+    window.setTimeout(() => field.classList.remove("is-flicker"), 460);
+  }
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     const form = formRef.current;
@@ -575,7 +583,7 @@ function ContactForm() {
         </h3>
       </div>
 
-      <form className="kontak-form" id="kontakForm" noValidate ref={formRef} onSubmit={handleSubmit}>
+      <form className="kontak-form" id="kontakForm" noValidate ref={formRef} onSubmit={handleSubmit} onInput={handleNeonFlicker}>
         <div className="kontak-field kontak-field--icon">
           <ContactNameIcon />
           <label className="kontak-label-sr" htmlFor="kontakName">
