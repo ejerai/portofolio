@@ -470,11 +470,9 @@ interface Web3FormsResponse {
 
 function ContactNameIcon() {
   return (
-    <svg className="kontak-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <g>
-        <path d="M98.80039,256.86631c-.97137-1.16611-2.19075-2.16707-3.51485-2.16707s-2.54349,1.001-3.51485,2.16707a4.53642,4.53642,0,0,0,.3,6.103h.00006a4.54643,4.54643,0,0,0,6.42959,0h.00006A4.53642,4.53642,0,0,0,98.80039,256.86631Z" transform="translate(-83.28549 -252.69924)"></path>
-        <rect x="2" y="15.30177" width="20" height="6.69823" rx="3.34911"></rect>
-      </g>
+    <svg className="kontak-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="7.5" r="4" />
+      <path d="M4.25 19.4c0-2.95 3.5-5.15 7.75-5.15s7.75 2.2 7.75 5.15c0 1.25-1.05 2.1-2.7 2.1H6.95c-1.65 0-2.7-.85-2.7-2.1Z" />
     </svg>
   );
 }
@@ -616,9 +614,7 @@ function ContactForm() {
   );
 }
 
-/* =========================================================================
- * AboutClient — the about page itself
- * ========================================================================= */
+/* about client */
 
 export function AboutClient() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -633,7 +629,6 @@ export function AboutClient() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // kunci scroll halaman selama modal sertifikat terbuka
   useEffect(() => {
     document.documentElement.classList.toggle("modal-open", activeModal !== null);
     return () => document.documentElement.classList.remove("modal-open");
@@ -666,7 +661,7 @@ export function AboutClient() {
       <main>
         <section className="about-section">
           <div className="about-container">
-            <div className="about-left">
+            <div className="about-info">
               <h1 className="about-name reveal reveal-left">
                 Ezra<br />Rahmaditya<em>.</em>
               </h1>
@@ -733,40 +728,38 @@ export function AboutClient() {
                   CV Ezra Rahmaditya
                 </a>
               </div>
-
-              <PinGallery onImageClick={(src, alt) => setLightbox({ src, alt })} />
             </div>
 
-            <ImageLightbox
-              src={lightbox?.src || ""}
-              alt={lightbox?.alt || ""}
-              open={lightbox !== null}
-              onClose={() => setLightbox(null)}
-            />
-
-            <div className="about-right reveal reveal-right" style={{ ["--reveal-delay" as string]: "0.1s" }}>
-              <div className="folder-grid">
-                <EspFolderCard
-                  folder="akademik"
-                  tabLabel="Akademik"
-                  ariaLabel="Buka folder Sertifikat Akademik"
-                  title="Sertifikat"
-                  tags={["Pemrograman"]}
-                  onOpen={setActiveModal}
-                />
-                <EspFolderCard
-                  folder="prestasi"
-                  tabLabel="Non-Akademik"
-                  ariaLabel="Buka folder Prestasi & Sertifikat"
-                  title="Prestasi & Sertif"
-                  tags={["Olahraga", "Volunteer"]}
-                  onOpen={setActiveModal}
-                />
-              </div>
-
-              <ContactForm />
+            <div className="folder-grid about-folders reveal reveal-right" style={{ ["--reveal-delay" as string]: "0.1s" }}>
+              <EspFolderCard
+                folder="akademik"
+                tabLabel="Akademik"
+                ariaLabel="Buka folder Sertifikat Akademik"
+                title="Sertifikat"
+                tags={["Pemrograman"]}
+                onOpen={setActiveModal}
+              />
+              <EspFolderCard
+                folder="prestasi"
+                tabLabel="Non-Akademik"
+                ariaLabel="Buka folder Prestasi & Sertifikat"
+                title="Prestasi & Sertif"
+                tags={["Olahraga", "Volunteer"]}
+                onOpen={setActiveModal}
+              />
             </div>
+
+            <PinGallery onImageClick={(src, alt) => setLightbox({ src, alt })} />
+
+            <ContactForm />
           </div>
+
+          <ImageLightbox
+            src={lightbox?.src || ""}
+            alt={lightbox?.alt || ""}
+            open={lightbox !== null}
+            onClose={() => setLightbox(null)}
+          />
         </section>
       </main>
 

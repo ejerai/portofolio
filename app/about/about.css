@@ -34,13 +34,35 @@ h3 {
   width: 100%;
   max-width: 1140px;
   display: grid;
-  grid-template-columns: 440px 1fr;
-  gap: 0 72px;
+  grid-template-columns: 440px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 56px 72px;
   align-items: start;
 }
-.about-left {
-  position: sticky;
-  top: 110px;
+/* info folder sertifikat */
+.about-info {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.about-folders {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: stretch;
+  min-width: 0;
+}
+.pin-gallery {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: stretch;
+}
+.kontak-card {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: stretch;
 }
 .about-name {
   font-family: var(--font-display);
@@ -57,7 +79,7 @@ h3 {
 .about-list {
   display: flex;
   flex-direction: column;
-  margin-bottom: 22px;
+  margin-bottom: 0;
 }
 .about-row {
   display: grid;
@@ -97,6 +119,8 @@ h3 {
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-top: auto;
+  padding-top: 22px;
 }
 .btn-ghost {
   display: inline-flex;
@@ -127,14 +151,17 @@ h3 {
   background: rgba(163, 135, 113, 0.05);
   transform: translateY(-2px);
 }
-.about-right {
-  display: flex;
-  flex-direction: column;
-}
 .folder-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   gap: 20px;
+}
+.about-folders .folder-card {
+  height: auto;
+  min-height: 0;
+}
+.about-folders .folder-body {
+  padding: 26px 28px 20px;
 }
 .folder-card {
   cursor: pointer;
@@ -444,10 +471,23 @@ h3 {
   }
   .about-container {
     grid-template-columns: 1fr;
+    grid-template-rows: none;
     gap: 52px 0;
   }
-  .about-left {
-    position: static;
+  .about-info,
+  .about-folders,
+  .pin-gallery,
+  .kontak-card {
+    grid-column: 1;
+    grid-row: auto;
+    align-self: start;
+  }
+  .about-cta {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .about-list {
+    margin-bottom: 22px;
   }
   .about-name {
     font-size: 2.6rem;
@@ -455,6 +495,7 @@ h3 {
   .folder-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
     gap: 20px;
   }
   .dossier-espresso {
@@ -475,33 +516,17 @@ h3 {
     flex-direction: column;
     align-items: stretch;
   }
-  .about-left,
-  .about-right {
-    display: contents;
-  }
   .about-name {
-    order: 1;
     font-size: 2.2rem;
   }
-  .about-list {
-    margin-top: -50px;
-    order: 2;
-  }
-  .about-cta {
-    order: 3;
-  }
   .folder-grid {
-    order: 4;
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
   }
-  .pin-gallery {
-    order: 5;
-  }
-  .kontak-card {
-    order: 6;
+  .about-folders .folder-card {
+    height: auto;
   }
   .about-row {
     grid-template-columns: 84px 1fr;
@@ -571,14 +596,10 @@ h3 {
   }
 }
 .pin-gallery {
-  margin-top: 30px; 
-}
-.about-title {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--ink-primary);
-  margin: 0 0 12px;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 .pin-gallery-dot {
   color: var(--accent-gold);
@@ -587,19 +608,21 @@ h3 {
   display: flex;
   align-items: stretch;
   gap: 12px;
+  flex: 1;
 }
 .pin-slider {
   position: relative;
   flex: 1;
   min-width: 0;
-  height: 320px;
+  min-height: 320px;
   border-radius: 10px;
   overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--border-strong);
 }
 .pin-slider-track {
-  height: 100%;
+  position: absolute;
+  inset: 0;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
@@ -771,7 +794,7 @@ h3 {
 }
 @media (max-width: 640px) {
   .pin-slider {
-    height: 240px;
+    min-height: 240px;
   }
 }
 .lightbox {
@@ -933,15 +956,25 @@ h3 {
   }
 }
 .kontak-card {
-  margin-top: 40px;
+  margin-top: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  scroll-margin-top: 110px;
 }
+
+/* judul "Galeriku." dan "Kontak." */
 .about-title {
   font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 700;
+  line-height: 1.3;
   color: var(--ink-primary);
-  margin: 0 0 6px;
+  margin: 0 0 14px;
+}
+.kontak-card-head {
+  margin: 0;
 }
 .kontak-dot {
   color: var(--accent-gold);
@@ -949,6 +982,7 @@ h3 {
 .kontak-form {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 .kontak-field {
   position: relative;
@@ -997,10 +1031,13 @@ h3 {
   transform: scale(1.15) translateX(1px);
 }
 .kontak-field--textarea {
-  align-items: flex-start;
+  align-items: stretch;
+  flex: 1;
+  display: flex;
 }
 .kontak-icon--top {
   margin-top: 16px;
+  align-self: flex-start;
 }
 .kontak-label-sr {
   position: absolute;
@@ -1028,8 +1065,9 @@ h3 {
   opacity: 0.65;
 }
 .kontak-textarea {
-  resize: vertical;
-  min-height: 46px;
+  resize: none;
+  flex: 1;
+  min-height: 84px;
   padding-top: 16px;
   font-family: var(--font-body);
 }
@@ -1039,6 +1077,7 @@ h3 {
   justify-content: flex-end;
   gap: 16px;
   margin-top: 22px;
+  min-height: 46px;
 }
 .kontak-submit {
   display: inline-flex;
