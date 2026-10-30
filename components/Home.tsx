@@ -126,7 +126,6 @@ function ExternalLinkIcon() {
   );
 }
 
-// harus sama dengan durasi transisi opacity .project-modal di globals.css
 const MODAL_CLOSE_MS = 220;
 
 interface ProjectModalProps {

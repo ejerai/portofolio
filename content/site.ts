@@ -2,6 +2,24 @@ import type { Project, EspData } from "@/types/site";
 
 /* project card */
 export const projects: Project[] = [
+    {
+    id: "teduh",
+    ariaLabel: "Buka detail Teduh",
+    tabLabel: "Dashboard",
+    titleLines: ["Teduh"],
+    meta: "Panti Kemah Beth",
+    tags: ["TypeScript", "PostgreSQL", "JavaScript"],
+    refYear: "2026",
+    img: "/gmi/teduh.webp",
+    imgAlt: "Teduh - Ezra Rahmaditya",
+    modalTitleLines: ["Teduh"],
+    desc: "Simple Dashboard dengan gaya design clean UI, diproject ini saya lebih dalam lagi dalam belajar pengembangan Front-End",
+    metaValue: "Panti Kemah Beth Ciater",
+    chips: [{ color: "#0099ff", label: "TypeScript" },{ color: "#10436a", label: "PostgreSQL" },{ color: "#e2bf21", label: "JavaScript" }],
+    actionHref: "https://kemahbeth.vercel.app",
+    actionTarget: "_blank",
+    actionLabel: "Lihat Proyek",
+  },
   {
     id: "karhutla",
     ariaLabel: "Buka detail Karhutla",

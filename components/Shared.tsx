@@ -179,6 +179,29 @@ function ExchangeIcon({ className, style }: TechIconSvgProps) {
   );
 }
 
+function TypeScriptIcon({ className, style }: TechIconSvgProps) {
+  return (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="3" />
+      <path d="M6.5 10.5h5M9 10.5V17" />
+      <path d="M17.2 10.9C16.8 10.4 16.2 10.2 15.5 10.2C14.5 10.2 13.8 10.7 13.8 11.5C13.8 13.5 17.4 12.6 17.4 14.9C17.4 15.9 16.6 16.6 15.5 16.6C14.7 16.6 14 16.3 13.6 15.8" />
+    </svg>
+  );
+}
+
+function PostgresIcon({ className, style }: TechIconSvgProps) {
+  return (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 15V9c0-2.5 1.8-4.5 4-4.5s4 2 4 4.5v6" />
+      <path d="M8 8.5C5 7 3 8.5 3 11.5s2 5 5 4" />
+      <path d="M16 8.5c3-1.5 5 0 5 3s-2 5-5 4" />
+      <path d="M12 11v6.5c0 1.2.6 2 1.6 2" />
+      <circle cx="9.8" cy="9.5" r=".6" fill="currentColor" stroke="none" />
+      <circle cx="14.2" cy="9.5" r=".6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 function ElephantIcon({ className, style }: TechIconSvgProps) {
   return (
     <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -228,6 +251,8 @@ function TagIcon({ className, style }: TechIconSvgProps) {
 }
 
 const TECH_ICON_MAP: Record<string, (props: TechIconSvgProps) => React.JSX.Element> = {
+  typescript: TypeScriptIcon,
+  postgresql: PostgresIcon,
   astro: AstroIcon,
   "nasa firms api": SatelliteIcon,
   python: PythonIcon,
