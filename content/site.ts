@@ -13,7 +13,7 @@ export const projects: Project[] = [
     img: "/gmi/teduh.webp",
     imgAlt: "Teduh - Ezra Rahmaditya",
     modalTitleLines: ["Teduh"],
-    desc: "Simple Dashboard dengan gaya design clean UI, diproject ini saya lebih dalam lagi dalam belajar pengembangan Front-End",
+    desc: "Simple Dashboard dengan gaya design clean UI, diproject ini saya lebih dalam lagi dalam belajar pengembangan Front-End dan database yang digunakan Neon by Vercel.",
     metaValue: "Panti Kemah Beth Ciater",
     chips: [{ color: "#0099ff", label: "TypeScript" },{ color: "#10436a", label: "PostgreSQL" },{ color: "#e2bf21", label: "JavaScript" }],
     actionHref: "https://kemahbeth.vercel.app",
